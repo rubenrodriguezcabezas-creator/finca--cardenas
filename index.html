@@ -46,10 +46,10 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      padding: 14px 28px;
+      padding: 16px 28px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       transition: background 0.4s, box-shadow 0.4s;
     }
     header.scrolled {
@@ -61,29 +61,30 @@
     .logo-link {
       display: flex;
       align-items: center;
-      gap: 10px;
       text-decoration: none;
     }
-    /* Logo image — shown when available */
     .logo-img {
-      height: 44px;
+      height: 72px;
       width: auto;
       display: block;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.35));
+      transition: filter 0.3s;
     }
-    /* Fallback text logo if image fails */
+    header.scrolled .logo-img {
+      filter: none;
+    }
     .logo-img-fallback {
       display: none;
-    }
-    .logo-img.error ~ .logo-img-fallback {
-      display: flex;
       flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
     .logo-name {
       font-family: var(--font-serif);
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 600;
       letter-spacing: 0.06em;
-      color: var(--navy);
+      color: var(--cream);
     }
     .logo-sub {
       font-family: var(--font-sans);
@@ -91,30 +92,15 @@
       font-weight: 400;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--olive);
-      margin-top: 3px;
+      color: rgba(246,238,229,0.6);
+      margin-top: 4px;
     }
-    /* When header is dark (over hero) show logo white version */
-    header:not(.scrolled) .logo-name { color: var(--cream); }
-    header:not(.scrolled) .logo-sub  { color: rgba(246,238,229,0.55); }
+    header.scrolled .logo-name { color: var(--navy); }
+    header.scrolled .logo-sub  { color: var(--olive); }
 
     .header-cta {
-      font-family: var(--font-sans);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--cream);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(246,238,229,0.5);
-      padding-bottom: 1px;
-      transition: color 0.2s, border-color 0.2s;
+      display: none; /* Hidden — CTA is in the hero */
     }
-    header.scrolled .header-cta {
-      color: var(--navy);
-      border-color: var(--navy);
-    }
-    .header-cta:hover { color: var(--gold); border-color: var(--gold); }
 
     /* ─── HERO ─── */
     .hero {
@@ -407,19 +393,74 @@
       line-height: 1.55;
     }
 
+    /* ─── MINI FORM ─── */
+    .section-mini-form {
+      background: var(--navy);
+      padding: 56px 0;
+    }
+    .mini-form-inner {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .mini-form-label {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.3rem;
+      font-weight: 300;
+      color: var(--cream);
+      flex: 1;
+      min-width: 200px;
+    }
+    #mini-form {
+      display: flex;
+      gap: 0;
+      flex: 2;
+      min-width: 260px;
+      margin: 0;
+      max-width: 100%;
+    }
+    #mini-form input[type="email"] {
+      flex: 1;
+      border-right: none;
+      padding: 14px 18px;
+    }
+    #mini-form button {
+      padding: 14px 28px;
+      background: var(--gold);
+      color: var(--navy-deep);
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    #mini-form button:hover { background: var(--gold-light); }
+    .mini-success {
+      display: none;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--gold-light);
+      flex: 2;
+    }
+    .mini-success.visible { display: block; }
+
     /* ─── ORIGIN PHOTO + PLACA ─── */
     .origin-photo {
       margin-top: 56px;
       width: 100%;
-      height: clamp(220px, 42vw, 520px);
+      background: var(--cream-dark);
       overflow: hidden;
-      position: relative;
-      background: var(--navy-deep);
     }
     .origin-photo img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: center 55%;
+      width: 100%;
+      height: auto;
       display: block;
       opacity: 0;
       transition: opacity 0.6s;
@@ -675,7 +716,6 @@
         <span class="logo-sub">Aceite de Oliva Virgen Extra</span>
       </div>
     </a>
-    <a href="#unirse" class="header-cta">Acompañar la historia</a>
   </header>
 
   <!-- ─── HERO ─── -->
@@ -743,12 +783,28 @@
         <span class="photo-caption">Los olivos</span>
       </div>
       <div class="photo-cell fade-in d2">
-        <img src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2010_52_01.png" alt="La perdiz en la finca — Finca Cárdenas" loading="lazy" />
+        <img src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2010_53_00.png" alt="La perdiz en la finca — Finca Cárdenas" loading="lazy" />
         <span class="photo-caption">La vida en la finca</span>
       </div>
       <div class="photo-cell fade-in d3">
-        <img src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2010_53_00.png" alt="El fruto — aceitunas Finca Cárdenas" loading="lazy" />
+        <img src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2010_52_01.png" alt="El fruto — aceitunas Finca Cárdenas" loading="lazy" />
         <span class="photo-caption">El fruto</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── MINI FORM (tras galería) ─── -->
+  <section class="section-mini-form">
+    <div class="container">
+      <div class="mini-form-inner fade-in">
+        <p class="mini-form-label">No te pierdas lo que viene</p>
+        <form id="mini-form" novalidate>
+          <input type="email" name="email" placeholder="Tu correo electrónico" autocomplete="email" required />
+          <button type="submit">Acompañar →</button>
+        </form>
+        <div class="mini-success" id="mini-success">
+          <p>¡Bienvenido a la historia!</p>
+        </div>
       </div>
     </div>
   </section>
@@ -807,12 +863,13 @@
       </div>
     </div>
 
-    <!-- Panorámica Sierra Nevada -->
+    <!-- Ilustración acuarela de la finca -->
     <div class="origin-photo fade-in">
       <img
-        src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2011_06_13.png"
-        alt="Los olivos de Finca Cárdenas con Sierra Nevada al fondo"
+        src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/Captura%20de%20pantalla%202026-06-11%20102028.png"
+        alt="Ilustración del Cortijo de Cárdenas"
         loading="lazy"
+        style="object-fit: contain; background: var(--cream-dark);"
       />
     </div>
 
@@ -980,7 +1037,17 @@
       document.querySelectorAll('.hero .fade-in').forEach(el => el.classList.add('visible'));
     }, 80);
 
-    // Form
+    // Mini form
+    document.getElementById('mini-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = this.querySelector('[name="email"]').value.trim();
+      if (!email || !email.includes('@')) { this.querySelector('[name="email"]').focus(); return; }
+      this.style.display = 'none';
+      document.getElementById('mini-success').classList.add('visible');
+      console.log('Mini form subscriber:', { email });
+    });
+
+    // Main form
     document.getElementById('signup-form').addEventListener('submit', function(e) {
       e.preventDefault();
       const email  = this.querySelector('[name="email"]').value.trim();
