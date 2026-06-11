@@ -7,36 +7,39 @@
   <meta name="description" content="Una historia que se cuenta mientras sucede. Sigue el camino de nuestros olivos desde el primer día." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --black:   #111110;
-      --off-white: #f5f2ec;
-      --warm-white: #faf8f4;
-      --gold:    #b8965a;
-      --gold-light: #d4b078;
-      --muted:   #7a7570;
-      --border:  #e2ddd6;
+      --navy:      #052451;
+      --navy-deep: #031a3d;
+      --olive:     #6F7750;
+      --olive-dark:#535a3c;
+      --gold:      #BE9659;
+      --gold-light:#d4b07a;
+      --cream:     #F6EEE5;
+      --cream-dark:#ede3d6;
+      --muted:     #7a7268;
+      --border:    #ddd5c8;
 
-      --font-serif: 'Playfair Display', Georgia, serif;
-      --font-sans:  'Inter', system-ui, sans-serif;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans:  'Montserrat', system-ui, sans-serif;
 
       --max: 680px;
-      --max-wide: 900px;
+      --max-wide: 940px;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--warm-white);
-      color: var(--black);
+      background: var(--cream);
+      color: var(--navy);
       font-family: var(--font-sans);
       font-weight: 300;
-      font-size: 17px;
-      line-height: 1.75;
+      font-size: 16px;
+      line-height: 1.8;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -45,10 +48,7 @@
       width: 100%;
       max-width: var(--max);
       margin-inline: auto;
-      padding-inline: 24px;
-    }
-    .container--wide {
-      max-width: var(--max-wide);
+      padding-inline: 28px;
     }
 
     /* ── HEADER ── */
@@ -56,45 +56,60 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      padding: 20px 24px;
+      padding: 18px 28px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: transparent;
-      transition: background 0.4s, border-bottom 0.4s;
+      transition: background 0.4s, box-shadow 0.4s;
     }
     header.scrolled {
-      background: rgba(250, 248, 244, 0.95);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
+      background: rgba(246, 238, 229, 0.96);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 1px 0 var(--border);
     }
+
     .logo {
-      font-family: var(--font-serif);
-      font-size: 17px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      color: var(--black);
+      display: flex;
+      align-items: center;
+      gap: 12px;
       text-decoration: none;
     }
-    .logo span {
-      display: block;
-      font-family: var(--font-sans);
-      font-size: 9px;
-      font-weight: 400;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-top: -2px;
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      flex-shrink: 0;
     }
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+    .logo-text .name {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--navy);
+    }
+    .logo-text .sub {
+      font-family: var(--font-sans);
+      font-size: 8px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--olive);
+      margin-top: 3px;
+    }
+
     .header-cta {
       font-family: var(--font-sans);
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 500;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--black);
+      color: var(--navy);
       text-decoration: none;
-      border-bottom: 1px solid var(--black);
+      border-bottom: 1px solid var(--navy);
       padding-bottom: 1px;
       transition: color 0.2s, border-color 0.2s;
     }
@@ -108,62 +123,99 @@
       justify-content: flex-end;
       padding-top: 100px;
       padding-bottom: 80px;
-      background: var(--black);
-      color: var(--off-white);
+      background-color: var(--navy-deep);
+      color: var(--cream);
       position: relative;
       overflow: hidden;
     }
-    .hero::before {
+
+    /* Watercolor illustration placeholder — replace src with your image */
+    .hero-illustration {
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/finca-illustration.jpg');
+      background-size: cover;
+      background-position: center 30%;
+      opacity: 0.22;
+    }
+
+    .hero::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at 30% 60%, rgba(184,150,90,0.12) 0%, transparent 65%);
-      pointer-events: none;
+      background: linear-gradient(
+        to top,
+        rgba(3,26,61,0.97) 0%,
+        rgba(3,26,61,0.6) 50%,
+        rgba(3,26,61,0.3) 100%
+      );
     }
-    .hero-year {
-      font-family: var(--font-sans);
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--gold);
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 14px;
       margin-bottom: 32px;
     }
+    .hero-eyebrow::before {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .hero-eyebrow span {
+      font-family: var(--font-sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
     .hero h1 {
       font-family: var(--font-serif);
-      font-size: clamp(2.2rem, 5.5vw, 3.8rem);
-      font-weight: 400;
-      line-height: 1.18;
-      max-width: 640px;
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 300;
+      line-height: 1.15;
+      max-width: 660px;
+      letter-spacing: 0.01em;
     }
     .hero h1 em {
       font-style: italic;
       color: var(--gold-light);
     }
+
     .hero-sub {
       margin-top: 28px;
       font-size: 15px;
       font-weight: 300;
-      color: rgba(245,242,236,0.65);
-      max-width: 480px;
-      line-height: 1.7;
+      color: rgba(246,238,229,0.6);
+      max-width: 460px;
+      line-height: 1.75;
     }
+
     .hero-actions {
-      margin-top: 48px;
+      margin-top: 52px;
       display: flex;
       align-items: center;
-      gap: 32px;
+      gap: 36px;
       flex-wrap: wrap;
     }
+
     .btn-primary {
       display: inline-block;
-      padding: 14px 32px;
+      padding: 15px 36px;
       background: var(--gold);
-      color: var(--black);
+      color: var(--navy-deep);
       font-family: var(--font-sans);
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.14em;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       text-decoration: none;
       border: none;
@@ -172,29 +224,12 @@
     }
     .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
     .btn-primary:active { transform: translateY(0); }
+
     .scroll-hint {
-      font-size: 11px;
-      letter-spacing: 0.15em;
+      font-size: 10px;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(245,242,236,0.4);
-    }
-    .hero-ornament {
-      position: absolute;
-      top: 50%;
-      right: -80px;
-      transform: translateY(-50%);
-      width: 340px;
-      height: 340px;
-      border-radius: 50%;
-      border: 1px solid rgba(184,150,90,0.15);
-      pointer-events: none;
-    }
-    .hero-ornament::after {
-      content: '';
-      position: absolute;
-      inset: 30px;
-      border-radius: 50%;
-      border: 1px solid rgba(184,150,90,0.08);
+      color: rgba(246,238,229,0.35);
     }
 
     /* ── DIVIDER ── */
@@ -202,440 +237,480 @@
       width: 40px;
       height: 1px;
       background: var(--gold);
-      margin: 40px 0;
+      margin: 36px 0;
     }
     .divider--center { margin-inline: auto; }
+    .divider--olive { background: var(--olive); }
 
-    /* ── SECTIONS ── */
-    section { padding: 100px 0; }
-    section + section { padding-top: 0; }
+    /* ── SECTION BASE ── */
+    section { padding: 96px 0; }
 
-    /* GROW */
-    .section-grow {
-      background: var(--warm-white);
-    }
     .section-label {
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.25em;
+      font-family: var(--font-sans);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 20px;
+      color: var(--olive);
+      margin-bottom: 18px;
     }
-    .section-grow h2 {
+
+    h2.serif {
       font-family: var(--font-serif);
-      font-size: clamp(1.7rem, 3.5vw, 2.5rem);
-      font-weight: 400;
-      line-height: 1.25;
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      font-weight: 300;
+      line-height: 1.2;
+      letter-spacing: 0.01em;
     }
+
     .lead {
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 300;
       color: var(--muted);
-      margin-top: 20px;
-      line-height: 1.8;
-    }
-    .body-text {
-      margin-top: 24px;
-      color: #3a3835;
+      margin-top: 18px;
       line-height: 1.85;
     }
-    .italic-pull {
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: 1.15em;
-      color: var(--gold);
-      margin-top: 28px;
-      display: block;
+
+    .body-text {
+      margin-top: 20px;
+      color: #3d3a35;
+      line-height: 1.9;
+      font-size: 15px;
     }
 
-    /* REALITY LIST */
+    .italic-accent {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.2em;
+      color: var(--gold);
+      display: block;
+      margin-top: 24px;
+    }
+
+    /* ── SECTION: VER CRECER ── */
+    .section-grow { background: var(--cream); }
+
     .reality-list {
       list-style: none;
       margin-top: 32px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 0;
     }
     .reality-list li {
+      padding: 16px 0;
+      border-top: 1px solid var(--border);
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      color: var(--navy);
       display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      font-size: 16px;
-      color: #3a3835;
+      align-items: center;
+      gap: 18px;
     }
+    .reality-list li:last-child { border-bottom: 1px solid var(--border); }
     .reality-list li::before {
       content: '';
       flex-shrink: 0;
-      margin-top: 10px;
-      width: 20px;
+      width: 24px;
       height: 1px;
       background: var(--gold);
     }
 
-    /* QUESTIONS SECTION */
+    /* ── SECTION: QUESTIONS ── */
     .section-questions {
-      background: var(--black);
-      color: var(--off-white);
+      background: var(--navy);
+      color: var(--cream);
     }
     .section-questions .section-label { color: var(--gold); }
-    .section-questions h2 {
-      font-family: var(--font-serif);
-      font-size: clamp(1.7rem, 3.5vw, 2.5rem);
-      font-weight: 400;
-      line-height: 1.25;
-    }
-    .question-stack {
+    .section-questions h2.serif { color: var(--cream); }
+
+    .q-stack {
       margin-top: 48px;
       display: flex;
       flex-direction: column;
-      gap: 0;
     }
     .q-item {
       padding: 22px 0;
-      border-top: 1px solid rgba(245,242,236,0.1);
-      font-size: 15px;
-      color: rgba(245,242,236,0.55);
-      font-weight: 300;
-      transition: color 0.3s;
+      border-top: 1px solid rgba(246,238,229,0.1);
     }
-    .q-item:last-child { border-bottom: 1px solid rgba(245,242,236,0.1); }
+    .q-item:last-child { border-bottom: 1px solid rgba(246,238,229,0.1); }
     .q-item strong {
       display: block;
       font-family: var(--font-serif);
-      font-size: 1.15em;
+      font-size: 1.25rem;
       font-weight: 400;
-      color: var(--off-white);
+      color: var(--cream);
       margin-bottom: 4px;
+      letter-spacing: 0.01em;
     }
+    .q-item p {
+      font-size: 14px;
+      color: rgba(246,238,229,0.5);
+      font-weight: 300;
+    }
+
     .if-block {
-      margin-top: 48px;
+      margin-top: 52px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 20px;
     }
     .if-item {
       font-family: var(--font-serif);
       font-style: italic;
-      font-size: clamp(1rem, 2.5vw, 1.3rem);
-      color: rgba(245,242,236,0.7);
-      line-height: 1.5;
-      padding-left: 20px;
+      font-size: clamp(1.1rem, 2.8vw, 1.45rem);
+      color: rgba(246,238,229,0.75);
+      padding-left: 24px;
       border-left: 2px solid var(--gold);
-    }
-    .if-conclusion {
-      margin-top: 32px;
-      font-size: 16px;
-      color: var(--gold-light);
-      font-weight: 300;
+      line-height: 1.45;
     }
 
-    /* ORIGIN */
-    .section-origin { background: var(--off-white); }
-    .year-badge {
-      display: inline-block;
-      font-family: var(--font-serif);
-      font-size: clamp(4rem, 12vw, 8rem);
-      font-weight: 700;
-      color: transparent;
-      -webkit-text-stroke: 1px var(--border);
-      line-height: 1;
-      margin-bottom: -16px;
-      user-select: none;
-      pointer-events: none;
-    }
-    .section-origin h2 {
-      font-family: var(--font-serif);
-      font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+    .if-conclusion {
+      margin-top: 36px;
+      font-size: 15px;
       font-weight: 400;
-      line-height: 1.25;
+      color: var(--gold-light);
+      letter-spacing: 0.02em;
     }
+
+    /* ── SECTION: ORIGIN ── */
+    .section-origin { background: var(--cream-dark); }
+
+    .year-outline {
+      font-family: var(--font-serif);
+      font-size: clamp(5rem, 15vw, 10rem);
+      font-weight: 600;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(111,119,80,0.25);
+      line-height: 0.85;
+      display: block;
+      margin-bottom: -8px;
+      user-select: none;
+    }
+
     .pull-quote {
       margin-top: 40px;
-      padding: 32px;
+      padding: 32px 36px;
       border: 1px solid var(--border);
-      background: var(--warm-white);
+      background: var(--cream);
+      border-left: 3px solid var(--gold);
     }
     .pull-quote p {
       font-family: var(--font-serif);
       font-style: italic;
-      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+      font-size: clamp(1.15rem, 2.8vw, 1.45rem);
+      font-weight: 300;
+      color: var(--navy);
       line-height: 1.55;
-      color: var(--black);
     }
 
-    /* BENEFITS */
-    .section-benefits { background: var(--warm-white); }
-    .section-benefits h2 {
-      font-family: var(--font-serif);
-      font-size: clamp(1.7rem, 3.5vw, 2.5rem);
-      font-weight: 400;
-      line-height: 1.25;
-    }
-    .benefits-grid {
+    /* ── SECTION: BENEFITS ── */
+    .section-benefits { background: var(--cream); }
+
+    .benefits-list {
       margin-top: 48px;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0;
+      display: flex;
+      flex-direction: column;
     }
     .benefit-item {
-      padding: 28px 0;
+      padding: 26px 0;
       border-top: 1px solid var(--border);
       display: grid;
-      grid-template-columns: 32px 1fr;
-      gap: 20px;
+      grid-template-columns: 28px 1fr;
+      gap: 22px;
       align-items: start;
     }
     .benefit-item:last-child { border-bottom: 1px solid var(--border); }
     .benefit-num {
       font-family: var(--font-serif);
-      font-size: 12px;
+      font-size: 13px;
+      font-weight: 300;
       color: var(--gold);
-      padding-top: 3px;
+      padding-top: 2px;
     }
     .benefit-text strong {
       display: block;
       font-family: var(--font-sans);
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 500;
-      letter-spacing: 0.03em;
-      margin-bottom: 4px;
+      letter-spacing: 0.04em;
+      color: var(--navy);
+      margin-bottom: 5px;
     }
     .benefit-text p {
       font-size: 14px;
       color: var(--muted);
-      line-height: 1.65;
+      line-height: 1.7;
+      font-weight: 300;
     }
 
-    /* FUTURE */
+    /* ── FINCA IMAGE STRIP ── */
+    .finca-strip {
+      width: 100%;
+      height: clamp(220px, 40vw, 480px);
+      background-color: var(--navy-deep);
+      background-image: url('assets/finca-illustration.jpg');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .finca-strip::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(3,26,61,0.1), rgba(3,26,61,0.4));
+    }
+
+    /* ── SECTION: FUTURE ── */
     .section-future {
-      background: var(--black);
-      color: var(--off-white);
+      background: var(--navy-deep);
+      color: var(--cream);
     }
-    .section-future h2 {
-      font-family: var(--font-serif);
-      font-size: clamp(1.7rem, 3.5vw, 2.5rem);
-      font-weight: 400;
-      line-height: 1.25;
-    }
-    .section-future .body-text { color: rgba(245,242,236,0.65); }
+    .section-future .section-label { color: var(--gold); }
+    .section-future h2.serif { color: var(--cream); }
+    .section-future .body-text { color: rgba(246,238,229,0.6); }
+
     .future-highlight {
-      margin-top: 36px;
-      padding: 28px 32px;
+      margin-top: 40px;
+      padding: 30px 32px;
       border-left: 2px solid var(--gold);
     }
     .future-highlight p {
       font-family: var(--font-serif);
       font-style: italic;
-      font-size: clamp(1rem, 2.5vw, 1.25rem);
-      color: var(--off-white);
-      line-height: 1.6;
+      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.65;
     }
 
-    /* INVITATION */
-    .section-invitation { background: var(--warm-white); }
-    .section-invitation h2 {
-      font-family: var(--font-serif);
-      font-size: clamp(1.7rem, 3.5vw, 2.5rem);
-      font-weight: 400;
-      line-height: 1.25;
-    }
+    /* ── SECTION: INVITATION ── */
+    .section-invitation { background: var(--cream-dark); }
+
     .who-list {
       list-style: none;
       margin-top: 36px;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
     }
     .who-list li {
-      padding: 18px 0;
+      padding: 20px 0;
       border-top: 1px solid var(--border);
       font-family: var(--font-serif);
       font-style: italic;
-      font-size: clamp(1rem, 2.2vw, 1.2rem);
-      color: var(--black);
+      font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+      font-weight: 300;
+      color: var(--navy);
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 18px;
     }
     .who-list li:last-child { border-bottom: 1px solid var(--border); }
-    .who-list li::before {
-      content: '→';
+    .who-list li .arrow {
       color: var(--gold);
       font-style: normal;
       font-family: var(--font-sans);
       flex-shrink: 0;
+      font-size: 14px;
     }
     .invitation-close {
       margin-top: 32px;
       font-family: var(--font-serif);
       font-style: italic;
-      font-size: 1.05em;
-      color: var(--gold);
+      font-size: 1.1em;
+      color: var(--olive);
     }
 
-    /* FORM SECTION */
+    /* ── SECTION: FORM ── */
     .section-form {
-      background: var(--off-white);
+      background: var(--navy);
+      color: var(--cream);
       padding-bottom: 120px;
     }
-    .form-inner {
-      text-align: center;
-    }
-    .form-inner .section-label { margin-bottom: 16px; }
+    .form-inner { text-align: center; }
+    .form-inner .section-label { color: var(--gold); }
+
     .form-inner h2 {
       font-family: var(--font-serif);
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      font-weight: 400;
-      line-height: 1.2;
+      font-size: clamp(2.2rem, 5.5vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--cream);
     }
-    .form-inner h2 em { font-style: italic; color: var(--gold); }
+    .form-inner h2 em { font-style: italic; color: var(--gold-light); }
+
     .form-inner .lead {
-      margin-inline: auto;
+      color: rgba(246,238,229,0.55);
       max-width: 460px;
-    }
-    .divider--center { margin-top: 36px; margin-bottom: 36px; }
-    .form-note {
-      margin-top: 12px;
-      font-size: 13px;
-      color: var(--muted);
+      margin-inline: auto;
     }
 
     form {
-      margin-top: 40px;
+      margin-top: 44px;
       display: flex;
       flex-direction: column;
       gap: 12px;
       max-width: 440px;
       margin-inline: auto;
     }
-    .input-row {
-      display: flex;
-      gap: 12px;
-    }
+
     input[type="text"],
     input[type="email"] {
       width: 100%;
-      padding: 14px 18px;
-      border: 1px solid var(--border);
-      background: var(--warm-white);
+      padding: 15px 20px;
+      border: 1px solid rgba(246,238,229,0.2);
+      background: rgba(246,238,229,0.05);
       font-family: var(--font-sans);
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 300;
-      color: var(--black);
+      color: var(--cream);
       outline: none;
-      transition: border-color 0.2s;
       border-radius: 0;
       -webkit-appearance: none;
+      transition: border-color 0.2s, background 0.2s;
     }
     input[type="text"]:focus,
     input[type="email"]:focus {
       border-color: var(--gold);
+      background: rgba(246,238,229,0.08);
     }
-    input::placeholder { color: #b0aca5; }
+    input::placeholder { color: rgba(246,238,229,0.3); }
+
     button[type="submit"] {
       width: 100%;
-      padding: 16px 32px;
-      background: var(--black);
-      color: var(--off-white);
+      padding: 17px 32px;
+      background: var(--gold);
+      color: var(--navy-deep);
       font-family: var(--font-sans);
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.16em;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       border: none;
       cursor: pointer;
       transition: background 0.2s, transform 0.15s;
     }
-    button[type="submit"]:hover { background: #222; transform: translateY(-1px); }
+    button[type="submit"]:hover { background: var(--gold-light); transform: translateY(-1px); }
     button[type="submit"]:active { transform: translateY(0); }
+
+    .form-note {
+      margin-top: 10px;
+      font-size: 12px;
+      color: rgba(246,238,229,0.3);
+      font-weight: 300;
+    }
 
     .success-msg {
       display: none;
-      padding: 24px 32px;
-      border: 1px solid var(--gold);
+      padding: 32px 36px;
+      border: 1px solid rgba(190,150,89,0.4);
       text-align: center;
       max-width: 440px;
-      margin-inline: auto;
-      margin-top: 20px;
+      margin: 20px auto 0;
     }
     .success-msg p {
       font-family: var(--font-serif);
       font-style: italic;
-      font-size: 1.1em;
-      color: var(--black);
+      font-size: 1.25rem;
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.6;
     }
     .success-msg.visible { display: block; }
 
-    /* FOOTER */
+    /* ── FOOTER ── */
     footer {
-      padding: 48px 24px;
-      border-top: 1px solid var(--border);
+      padding: 44px 28px;
+      border-top: 1px solid rgba(111,119,80,0.25);
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 16px;
-      background: var(--warm-white);
+      background: var(--navy-deep);
     }
-    footer .logo span { margin-top: 2px; }
     .footer-copy {
-      font-size: 12px;
-      color: var(--muted);
+      font-size: 11px;
+      font-weight: 300;
+      color: rgba(246,238,229,0.3);
+      letter-spacing: 0.04em;
     }
+    footer .logo-text .name { color: var(--cream); }
+    footer .logo-text .sub { color: rgba(246,238,229,0.4); }
 
     /* ── ANIMATIONS ── */
     .fade-in {
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+      transform: translateY(20px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
     }
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
     .fade-in-delay-1 { transition-delay: 0.1s; }
     .fade-in-delay-2 { transition-delay: 0.2s; }
-    .fade-in-delay-3 { transition-delay: 0.3s; }
-    .fade-in-delay-4 { transition-delay: 0.45s; }
+    .fade-in-delay-3 { transition-delay: 0.32s; }
+    .fade-in-delay-4 { transition-delay: 0.46s; }
 
     /* ── RESPONSIVE ── */
-    @media (min-width: 600px) {
-      .input-row { flex-direction: row; }
-      .benefits-grid { grid-template-columns: 1fr 1fr; }
-      .benefit-item:nth-child(even) { border-left: 1px solid var(--border); padding-left: 28px; }
+    @media (min-width: 640px) {
+      .benefits-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+      }
+      .benefit-item:nth-child(odd)  { border-right: 1px solid var(--border); padding-right: 28px; }
+      .benefit-item:nth-child(even) { padding-left: 28px; }
+      .benefit-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--border); }
     }
 
     @media (max-width: 480px) {
       section { padding: 72px 0; }
-      .hero { padding-bottom: 60px; }
-      .hero-ornament { display: none; }
-      .pull-quote { padding: 24px; }
-      .future-highlight { padding: 24px; }
+      .hero { padding-bottom: 56px; }
+      .pull-quote { padding: 24px 20px; }
+      .future-highlight { padding: 20px 22px; }
       footer { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
-
 <body>
 
-  <!-- HEADER -->
+  <!-- ── HEADER ── -->
   <header id="site-header">
     <a href="#" class="logo">
-      Finca Cárdenas
-      <span>Aceite de Oliva Virgen Extra</span>
+      <!-- Inline SVG inspired by the logo mark -->
+      <svg class="logo-icon" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Pomegranate/olive shape -->
+        <path d="M19 4 C19 4 14 2 11 5 C8 8 8 13 8 16 C8 22 12 30 19 33 C26 30 30 22 30 16 C30 13 30 8 27 5 C24 2 19 4 19 4Z" stroke="#052451" stroke-width="1.2" fill="none"/>
+        <!-- Crown on top -->
+        <path d="M16 4.5 L17.5 1.5 L19 3.5 L20.5 1 L22 4" stroke="#BE9659" stroke-width="1.1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Olive branch -->
+        <path d="M10 18 C7 16 5 14 7 11" stroke="#6F7750" stroke-width="1" fill="none" stroke-linecap="round"/>
+        <ellipse cx="7.5" cy="12.5" rx="2" ry="1.2" fill="#6F7750" transform="rotate(-30 7.5 12.5)"/>
+        <ellipse cx="6.5" cy="15.5" rx="2" ry="1.2" fill="#6F7750" transform="rotate(-50 6.5 15.5)"/>
+        <!-- Small olive -->
+        <circle cx="9" cy="19" r="2" fill="#6F7750"/>
+        <circle cx="8.2" cy="18" r="1.2" fill="#5a6244"/>
+        <!-- House silhouette inside -->
+        <path d="M15 23 L15 19 L19 16.5 L23 19 L23 23Z" stroke="#052451" stroke-width="1" fill="none"/>
+        <path d="M17 23 L17 20.5 L21 20.5 L21 23" stroke="#052451" stroke-width="0.8" fill="none"/>
+        <!-- Ground lines -->
+        <path d="M13 24.5 Q16 23 19 24 Q22 25 25 23.5" stroke="#052451" stroke-width="0.7" fill="none"/>
+      </svg>
+      <div class="logo-text">
+        <span class="name">Finca Cárdenas</span>
+        <span class="sub">Aceite de Oliva Virgen Extra</span>
+      </div>
     </a>
     <a href="#unirse" class="header-cta">Acompañar la historia</a>
   </header>
 
-  <!-- HERO -->
+  <!-- ── HERO ── -->
   <section class="hero">
-    <div class="hero-ornament"></div>
-    <div class="container">
-      <p class="hero-year fade-in">Desde 1974 · Tercera Generación</p>
+    <div class="hero-illustration" role="img" aria-label="Ilustración acuarela de Finca Cárdenas"></div>
+    <div class="hero-content container">
+      <div class="hero-eyebrow fade-in">
+        <span>Desde 1974 · Tercera Generación · Cortijo de Cárdenas</span>
+      </div>
       <h1 class="fade-in fade-in-delay-1">
-        Hay historias que se cuentan<br>
-        cuando terminan.<br>
+        Hay historias que se cuentan<br>cuando terminan.<br>
         <em>Nosotros hemos decidido<br>contarte esta mientras sucede.</em>
       </h1>
       <p class="hero-sub fade-in fade-in-delay-2">
@@ -648,39 +723,39 @@
     </div>
   </section>
 
-  <!-- SECTION 1: VER CRECER -->
+  <!-- ── SECTION 1: VER CRECER ── -->
   <section class="section-grow">
     <div class="container">
       <p class="section-label fade-in">La realidad</p>
-      <h2 class="fade-in fade-in-delay-1">Hay cosas que solo las entiendes cuando las ves crecer</h2>
+      <h2 class="serif fade-in fade-in-delay-1">Hay cosas que solo las entiendes cuando las ves crecer</h2>
       <p class="lead fade-in fade-in-delay-2">
         La mayoría de personas descubre el aceite cuando ya está embotellado.<br>
-        Pero para entonces la historia ya ha terminado.
+        Para entonces, la historia ya ha terminado.
       </p>
       <div class="divider fade-in fade-in-delay-3"></div>
       <p class="body-text fade-in">
         Nosotros queremos enseñarte algo mucho más raro.
       </p>
-      <em class="italic-pull fade-in">La realidad.</em>
+      <em class="italic-accent fade-in">La realidad.</em>
       <ul class="reality-list">
         <li class="fade-in">Verás los olivos cuando florecen</li>
         <li class="fade-in fade-in-delay-1">Cuando crecen</li>
-        <li class="fade-in fade-in-delay-2">Cómo evoluciona la finca durante el año</li>
+        <li class="fade-in fade-in-delay-2">Cómo evoluciona la finca durante todo el año</li>
         <li class="fade-in fade-in-delay-3">La finca tal y como es, sin filtros</li>
       </ul>
-      <p class="body-text fade-in" style="margin-top:32px; font-family: var(--font-serif); font-style:italic; color: var(--muted);">
+      <p class="body-text fade-in" style="margin-top:32px; font-family:var(--font-serif); font-style:italic; color:var(--muted);">
         Porque creemos que la realidad ya es suficientemente interesante.
       </p>
     </div>
   </section>
 
-  <!-- SECTION 2: QUESTIONS -->
+  <!-- ── SECTION 2: PREGUNTAS ── -->
   <section class="section-questions">
     <div class="container">
       <p class="section-label fade-in">Pregúntate esto</p>
-      <h2 class="fade-in fade-in-delay-1">¿Cuánto sabes sobre una botella de aceite?</h2>
+      <h2 class="serif fade-in fade-in-delay-1">¿Cuánto sabes sobre una botella de aceite?</h2>
 
-      <div class="question-stack fade-in fade-in-delay-2">
+      <div class="q-stack fade-in fade-in-delay-2">
         <div class="q-item">
           <strong>Probablemente sabes dónde la compras</strong>
         </div>
@@ -692,13 +767,13 @@
         </div>
         <div class="q-item">
           <strong>Pero…</strong>
-          ¿Has visto alguna vez esos árboles? ¿Sabes dónde están o cómo han evolucionado esos olivos? ¿Conoces a quien cuidó esos árboles durante todo el año?
+          <p>¿Has visto alguna vez esos árboles? ¿Sabes dónde están o cómo han evolucionado? ¿Conoces a quien los cuidó durante todo el año?</p>
         </div>
       </div>
 
-      <p class="body-text fade-in" style="color: rgba(245,242,236,0.55); margin-top: 32px;">
+      <p class="body-text fade-in" style="color:rgba(246,238,229,0.5); margin-top:32px;">
         Solo ves una etiqueta. Y nosotros creemos que debería ser al revés.<br>
-        <strong style="color: var(--off-white); font-weight:400;">Primero debe existir la historia, y luego el producto.</strong>
+        <span style="color:var(--cream); font-weight:400; font-family:var(--font-serif); font-style:italic; font-size:1.1em;">Primero debe existir la historia, y luego el producto.</span>
       </p>
 
       <div class="if-block">
@@ -711,12 +786,12 @@
     </div>
   </section>
 
-  <!-- SECTION 3: ORIGEN -->
+  <!-- ── SECTION 3: ORIGEN ── -->
   <section class="section-origin">
     <div class="container">
-      <div class="year-badge fade-in" aria-hidden="true">1974</div>
+      <span class="year-outline fade-in" aria-hidden="true">1974</span>
       <p class="section-label fade-in">El origen</p>
-      <h2 class="fade-in fade-in-delay-1">Todo tiene un origen</h2>
+      <h2 class="serif fade-in fade-in-delay-1">Todo tiene un origen</h2>
       <p class="body-text fade-in fade-in-delay-2">
         Nuestra historia no empezó con una marca, ni con una botella.<br>
         Empezó trabajando esta tierra generación tras generación.
@@ -733,13 +808,16 @@
     </div>
   </section>
 
-  <!-- SECTION 4: BENEFICIOS -->
+  <!-- ── FINCA IMAGE STRIP ── -->
+  <div class="finca-strip" role="img" aria-label="Ilustración acuarela del Cortijo de Cárdenas"></div>
+
+  <!-- ── SECTION 4: BENEFICIOS ── -->
   <section class="section-benefits">
     <div class="container">
       <p class="section-label fade-in">Lo que recibirás</p>
-      <h2 class="fade-in fade-in-delay-1">Si decides acompañarnos</h2>
+      <h2 class="serif fade-in fade-in-delay-1">Si decides acompañarnos</h2>
 
-      <div class="benefits-grid">
+      <div class="benefits-list">
         <div class="benefit-item fade-in">
           <span class="benefit-num">01</span>
           <div class="benefit-text">
@@ -765,7 +843,7 @@
           <span class="benefit-num">04</span>
           <div class="benefit-text">
             <strong>Historias del campo</strong>
-            <p>Lo que rara vez llega al consumidor final: decisiones, errores, descubrimientos.</p>
+            <p>Lo que rara vez llega al consumidor: decisiones, errores, descubrimientos.</p>
           </div>
         </div>
         <div class="benefit-item fade-in">
@@ -786,11 +864,11 @@
     </div>
   </section>
 
-  <!-- SECTION 5: FUTURO -->
+  <!-- ── SECTION 5: FUTURO ── -->
   <section class="section-future">
     <div class="container">
       <p class="section-label fade-in">El futuro</p>
-      <h2 class="fade-in fade-in-delay-1">Dentro de unos años</h2>
+      <h2 class="serif fade-in fade-in-delay-1">Dentro de unos años</h2>
       <p class="body-text fade-in fade-in-delay-2">
         Quizás exista una botella de aceite de Finca Cárdenas.<br>
         Quizás la tengas en tus manos.
@@ -806,24 +884,24 @@
     </div>
   </section>
 
-  <!-- SECTION 6: INVITACIÓN -->
+  <!-- ── SECTION 6: INVITACIÓN ── -->
   <section class="section-invitation">
     <div class="container">
       <p class="section-label fade-in">Una invitación</p>
-      <h2 class="fade-in fade-in-delay-1">No queremos clientes.<br>Todavía no.</h2>
-      <p class="body-text fade-in fade-in-delay-2">Queremos personas curiosas:</p>
+      <h2 class="serif fade-in fade-in-delay-1">No queremos clientes.<br>Todavía no.</h2>
+      <p class="lead fade-in fade-in-delay-2">Queremos personas curiosas:</p>
 
       <ul class="who-list">
-        <li class="fade-in">Que quieran aprender</li>
-        <li class="fade-in fade-in-delay-1">Que disfruten entendiendo cómo nacen las cosas</li>
-        <li class="fade-in fade-in-delay-2">Que valoren la autenticidad en un mundo cada vez más artificial</li>
+        <li class="fade-in"><span class="arrow">→</span> Que quieran aprender</li>
+        <li class="fade-in fade-in-delay-1"><span class="arrow">→</span> Que disfruten entendiendo cómo nacen las cosas</li>
+        <li class="fade-in fade-in-delay-2"><span class="arrow">→</span> Que valoren la autenticidad en un mundo cada vez más artificial</li>
       </ul>
 
       <p class="invitation-close fade-in">Si eres una de ellas, estás en el lugar correcto.</p>
     </div>
   </section>
 
-  <!-- FORM -->
+  <!-- ── SECTION FORM ── -->
   <section class="section-form" id="unirse">
     <div class="container">
       <div class="form-inner">
@@ -839,9 +917,7 @@
         <div class="divider divider--center fade-in fade-in-delay-3"></div>
 
         <form id="signup-form" class="fade-in" novalidate>
-          <div class="input-row">
-            <input type="text" name="nombre" placeholder="Tu nombre" autocomplete="given-name" required />
-          </div>
+          <input type="text" name="nombre" placeholder="Tu nombre" autocomplete="given-name" required />
           <input type="email" name="email" placeholder="Tu correo electrónico" autocomplete="email" required />
           <button type="submit">Acompañar la historia →</button>
           <p class="form-note">Sin spam. Sin publicidad. Puedes darte de baja cuando quieras.</p>
@@ -854,23 +930,33 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- ── FOOTER ── -->
   <footer>
     <a href="#" class="logo">
-      Finca Cárdenas
-      <span>Aceite de Oliva Virgen Extra · Desde 1974</span>
+      <svg class="logo-icon" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M19 4 C19 4 14 2 11 5 C8 8 8 13 8 16 C8 22 12 30 19 33 C26 30 30 22 30 16 C30 13 30 8 27 5 C24 2 19 4 19 4Z" stroke="rgba(246,238,229,0.4)" stroke-width="1.2" fill="none"/>
+        <path d="M16 4.5 L17.5 1.5 L19 3.5 L20.5 1 L22 4" stroke="#BE9659" stroke-width="1.1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M10 18 C7 16 5 14 7 11" stroke="#6F7750" stroke-width="1" fill="none" stroke-linecap="round"/>
+        <ellipse cx="7.5" cy="12.5" rx="2" ry="1.2" fill="#6F7750" transform="rotate(-30 7.5 12.5)"/>
+        <ellipse cx="6.5" cy="15.5" rx="2" ry="1.2" fill="#6F7750" transform="rotate(-50 6.5 15.5)"/>
+        <circle cx="9" cy="19" r="2" fill="#6F7750"/>
+      </svg>
+      <div class="logo-text">
+        <span class="name">Finca Cárdenas</span>
+        <span class="sub">Aceite de Oliva Virgen Extra · Desde 1974</span>
+      </div>
     </a>
-    <p class="footer-copy">© 2024 Finca Cárdenas. Todos los derechos reservados.</p>
+    <p class="footer-copy">© 2025 Finca Cárdenas. Todos los derechos reservados.</p>
   </footer>
 
   <script>
-    // Header scroll effect
+    // Header scroll
     const header = document.getElementById('site-header');
     window.addEventListener('scroll', () => {
-      header.classList.toggle('scrolled', window.scrollY > 40);
+      header.classList.toggle('scrolled', window.scrollY > 50);
     }, { passive: true });
 
-    // Intersection observer for fade-in animations
+    // Fade-in on scroll
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
@@ -878,16 +964,16 @@
           observer.unobserve(e.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-    // Hero elements visible immediately
-    document.querySelectorAll('.hero .fade-in').forEach(el => {
-      setTimeout(() => el.classList.add('visible'), 100);
-    });
+    // Hero visible immediately
+    setTimeout(() => {
+      document.querySelectorAll('.hero .fade-in').forEach(el => el.classList.add('visible'));
+    }, 80);
 
-    // Form submission
+    // Form
     document.getElementById('signup-form').addEventListener('submit', function(e) {
       e.preventDefault();
       const email = this.querySelector('[name="email"]').value.trim();
@@ -896,10 +982,9 @@
         this.querySelector('[name="email"]').focus();
         return;
       }
-      // Hide form, show success
       this.style.display = 'none';
       document.getElementById('success-msg').classList.add('visible');
-      // Here you would integrate with your email service (Mailchimp, ConvertKit, etc.)
+      // Connect to your email provider here (Mailchimp, Brevo, ConvertKit, etc.)
       console.log('New subscriber:', { nombre, email });
     });
   </script>
