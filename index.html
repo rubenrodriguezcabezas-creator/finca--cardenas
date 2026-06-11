@@ -39,6 +39,21 @@
       font-size: 16px;
       line-height: 1.8;
       -webkit-font-smoothing: antialiased;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='650' height='650'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.038%200.052' numOctaves='8' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0.28'/%3E%3C/filter%3E%3Crect width='650' height='650' fill='%23d2c3aa' filter='url(%23paper)'/%3E%3C/svg%3E");
+      background-attachment: fixed;
+    }
+
+    /* ─── PAPER TEXTURE ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9998;
+      pointer-events: none;
+      mix-blend-mode: multiply;
+      opacity: 0.18;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='650' height='650'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.038%200.052' numOctaves='8' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0.28'/%3E%3C/filter%3E%3Crect width='650' height='650' fill='%23d2c3aa' filter='url(%23paper)'/%3E%3C/svg%3E");
+      background-size: 650px 650px;
     }
 
     /* ─── HEADER ─── */
@@ -368,16 +383,39 @@
 
     /* ─── SECTION: ORIGEN ─── */
     .section-origin { background: var(--cream-dark); }
-    .year-outline {
-      font-family: var(--font-serif);
-      font-size: clamp(5rem, 16vw, 10rem);
-      font-weight: 600;
-      color: transparent;
-      -webkit-text-stroke: 1px rgba(111,119,80,0.22);
-      line-height: 0.85;
+    /* 1974 calligraphic draw */
+    .year-draw-wrap {
       display: block;
-      margin-bottom: -6px;
+      line-height: 0.85;
       user-select: none;
+      margin-bottom: -4px;
+    }
+    .year-svg {
+      width: clamp(260px, 68vw, 430px);
+      height: auto;
+      overflow: visible;
+    }
+    .year-text-path {
+      stroke-dasharray: 1600;
+      stroke-dashoffset: 1600;
+    }
+    .year-text-path.writing {
+      transition: stroke-dashoffset 1.9s cubic-bezier(0.3, 0, 0.1, 1);
+      stroke-dashoffset: 0;
+    }
+    .year-text-path.drawn {
+      fill: url(#yearGold);
+      stroke: url(#yearGold);
+      transition: fill 1.0s ease, stroke 1.0s ease;
+    }
+    .year-label {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .year-label.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     .pull-quote {
       margin-top: 40px;
@@ -761,26 +799,6 @@
     .section-benefits .container,
     .section-questions .container { position: relative; z-index: 1; }
 
-    /* ─── SHIMMER on year-outline ─── */
-    @keyframes shimmer {
-      0%   { background-position: -200% center; }
-      100% { background-position:  200% center; }
-    }
-    .year-outline {
-      background: linear-gradient(
-        90deg,
-        var(--gold) 0%,
-        #f0d898 40%,
-        var(--gold) 60%,
-        var(--gold-light) 100%
-      );
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: shimmer 4s linear infinite;
-    }
-
     /* ─── PULL-QUOTE gold line animate ─── */
     .pull-quote {
       border-left: none;
@@ -1006,8 +1024,30 @@
   <section class="section-origin">
 
     <div class="container">
-      <span class="year-outline fade-in" aria-hidden="true">1974</span>
-      <p class="section-label fade-in">El origen</p>
+      <div class="year-draw-wrap" aria-hidden="true">
+        <svg class="year-svg" viewBox="0 0 430 115" preserveAspectRatio="xMinYMid meet">
+          <defs>
+            <linearGradient id="yearGold" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#BE9659"/>
+              <stop offset="35%" stop-color="#f0d898"/>
+              <stop offset="55%" stop-color="#BE9659"/>
+              <stop offset="100%" stop-color="#d4b07a"/>
+            </linearGradient>
+          </defs>
+          <text class="year-text-path"
+                x="6" y="100"
+                font-family="Cormorant Garamond, Georgia, serif"
+                font-size="105"
+                font-weight="600"
+                letter-spacing="4"
+                fill="transparent"
+                stroke="#BE9659"
+                stroke-width="1.2"
+                stroke-linecap="round"
+                stroke-linejoin="round">1974</text>
+        </svg>
+      </div>
+      <p class="section-label year-label">El origen</p>
       <h2 class="serif fade-in d1">Todo tiene un origen</h2>
 
       <!-- Ilustración justo bajo el título, tamaño medio -->
@@ -1219,6 +1259,28 @@
       // 👉 Conecta aquí tu proveedor de email (Mailchimp, Brevo, ConvertKit…)
       console.log('Nuevo suscriptor:', { nombre, email });
     });
+
+    // 1974 calligraphic writing animation
+    const yearWrap = document.querySelector('.year-draw-wrap');
+    const yearPath = document.querySelector('.year-text-path');
+    const yearLabel = document.querySelector('.year-label');
+    if (yearWrap && yearPath) {
+      const yearIO = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          document.fonts.ready.then(() => {
+            yearPath.classList.add('writing');
+            setTimeout(() => {
+              yearPath.classList.add('drawn');
+              setTimeout(() => {
+                if (yearLabel) yearLabel.classList.add('visible');
+              }, 300);
+            }, 2000);
+          });
+          yearIO.disconnect();
+        }
+      }, { threshold: 0.35 });
+      yearIO.observe(yearWrap);
+    }
   </script>
 </body>
 </html>
