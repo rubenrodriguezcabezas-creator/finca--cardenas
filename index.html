@@ -276,6 +276,28 @@
 
     /* ─── SECTION: VER CRECER ─── */
     .section-grow { background: var(--cream); }
+    .grow-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    @media (min-width: 720px) {
+      .grow-layout { grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+    }
+    .grow-illustration {
+      width: 100%;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .grow-illustration img {
+      width: 100%;
+      height: auto;
+      display: block;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    .grow-illustration img.loaded { opacity: 1; }
     .reality-list {
       list-style: none;
       margin-top: 32px;
@@ -381,6 +403,21 @@
       letter-spacing: 0.03em;
     }
 
+    /* ─── PLACA HEADER ─── */
+    .placa-header {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 52px;
+    }
+    .placa-header img {
+      height: 140px;
+      width: auto;
+      display: block;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    .placa-header img.loaded { opacity: 1; }
+
     /* ─── SECTION: ORIGEN ─── */
     .section-origin { background: var(--cream-dark); }
     /* 1974 calligraphic draw */
@@ -388,7 +425,7 @@
       display: block;
       line-height: 0.85;
       user-select: none;
-      margin-bottom: -4px;
+      margin-bottom: 14px;
     }
     .year-svg {
       width: clamp(260px, 68vw, 430px);
@@ -915,24 +952,35 @@
   <!-- ─── VER CRECER ─── -->
   <section class="section-grow">
     <div class="container">
-      <p class="section-label fade-in">La realidad</p>
-      <h2 class="serif fade-in d1">Hay cosas que solo las entiendes cuando las ves crecer</h2>
-      <p class="lead fade-in d2">
-        La mayoría de personas descubre el aceite cuando ya está embotellado.<br>
-        Para entonces la historia ya ha terminado.
-      </p>
-      <div class="divider fade-in d3"></div>
-      <p class="body-text fade-in">Nosotros queremos enseñarte algo mucho más raro.</p>
-      <em class="italic-accent fade-in">La realidad.</em>
-      <ul class="reality-list">
-        <li class="fade-in">Verás los olivos cuando florecen</li>
-        <li class="fade-in d1">Cuando crecen</li>
-        <li class="fade-in d2">Cómo evoluciona la finca durante todo el año</li>
-        <li class="fade-in d3">La finca tal y como es, sin filtros</li>
-      </ul>
-      <p class="body-text fade-in" style="margin-top:28px; font-family:var(--font-serif); font-style:italic; color:var(--muted);">
-        Porque creemos que la realidad ya es suficientemente interesante.
-      </p>
+      <div class="grow-layout">
+        <div class="grow-text">
+          <p class="section-label fade-in">La realidad</p>
+          <h2 class="serif fade-in d1">Hay cosas que solo las entiendes cuando las ves crecer</h2>
+          <p class="lead fade-in d2">
+            La mayoría de personas descubre el aceite cuando ya está embotellado.<br>
+            Para entonces la historia ya ha terminado.
+          </p>
+          <div class="divider fade-in d3"></div>
+          <p class="body-text fade-in">Nosotros queremos enseñarte algo mucho más raro.</p>
+          <em class="italic-accent fade-in">La realidad.</em>
+          <ul class="reality-list">
+            <li class="fade-in">Verás los olivos cuando florecen</li>
+            <li class="fade-in d1">Cuando crecen</li>
+            <li class="fade-in d2">Cómo evoluciona la finca durante todo el año</li>
+            <li class="fade-in d3">La finca tal y como es, sin filtros</li>
+          </ul>
+          <p class="body-text fade-in" style="margin-top:28px; font-family:var(--font-serif); font-style:italic; color:var(--muted);">
+            Porque creemos que la realidad ya es suficientemente interesante.
+          </p>
+        </div>
+        <div class="grow-illustration fade-in d2">
+          <img
+            src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2014_20_59.png"
+            alt="Ilustración acuarela de olivos — Finca Cárdenas"
+            loading="lazy"
+          />
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1022,8 +1070,17 @@
 
   <!-- ─── ORIGEN ─── -->
   <section class="section-origin">
-
     <div class="container">
+
+      <!-- Placa cerámica centrada arriba -->
+      <div class="placa-header fade-in">
+        <img
+          src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/Captura%20de%20pantalla%202026-06-11%20101957.png"
+          alt="Placa histórica — Cortijo de Cárdenas"
+          loading="lazy"
+        />
+      </div>
+
       <div class="year-draw-wrap" aria-hidden="true">
         <svg class="year-svg" viewBox="0 0 430 115" preserveAspectRatio="xMinYMid meet">
           <defs>
@@ -1072,15 +1129,6 @@
       </p>
       <div class="pull-quote fade-in">
         <p>No somos una empresa que decidió contar una historia.<br>Somos una historia que ha decidido contarse.</p>
-      </div>
-      <div class="placa-wrap fade-in">
-        <img
-          src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/Captura%20de%20pantalla%202026-06-11%20101957.png"
-          alt="Placa histórica — Cortijo de Cárdenas"
-          class="placa-img"
-          loading="lazy"
-        />
-        <p class="placa-caption">Cortijo de Cárdenas · Fundado en 1979</p>
       </div>
     </div>
   </section>
