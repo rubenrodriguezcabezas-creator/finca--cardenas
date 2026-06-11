@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finca Cárdenas — Aceite de Oliva Virgen Extra</title>
+  <meta name="description" content="Una historia que se cuenta mientras sucede. Sigue el camino de nuestros olivos desde el primer día." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #111110;
+      --off-white: #f5f2ec;
+      --warm-white: #faf8f4;
+      --gold:    #b8965a;
+      --gold-light: #d4b078;
+      --muted:   #7a7570;
+      --border:  #e2ddd6;
+
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans:  'Inter', system-ui, sans-serif;
+
+      --max: 680px;
+      --max-wide: 900px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--warm-white);
+      color: var(--black);
+      font-family: var(--font-sans);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── UTILITY ── */
+    .container {
+      width: 100%;
+      max-width: var(--max);
+      margin-inline: auto;
+      padding-inline: 24px;
+    }
+    .container--wide {
+      max-width: var(--max-wide);
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: transparent;
+      transition: background 0.4s, border-bottom 0.4s;
+    }
+    header.scrolled {
+      background: rgba(250, 248, 244, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-family: var(--font-serif);
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--black);
+      text-decoration: none;
+    }
+    .logo span {
+      display: block;
+      font-family: var(--font-sans);
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: -2px;
+    }
+    .header-cta {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+      border-bottom: 1px solid var(--black);
+      padding-bottom: 1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .header-cta:hover { color: var(--gold); border-color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-top: 100px;
+      padding-bottom: 80px;
+      background: var(--black);
+      color: var(--off-white);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 60%, rgba(184,150,90,0.12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-year {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 32px;
+    }
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+      font-weight: 400;
+      line-height: 1.18;
+      max-width: 640px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+    .hero-sub {
+      margin-top: 28px;
+      font-size: 15px;
+      font-weight: 300;
+      color: rgba(245,242,236,0.65);
+      max-width: 480px;
+      line-height: 1.7;
+    }
+    .hero-actions {
+      margin-top: 48px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-block;
+      padding: 14px 32px;
+      background: var(--gold);
+      color: var(--black);
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+    .scroll-hint {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(245,242,236,0.4);
+    }
+    .hero-ornament {
+      position: absolute;
+      top: 50%;
+      right: -80px;
+      transform: translateY(-50%);
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      border: 1px solid rgba(184,150,90,0.15);
+      pointer-events: none;
+    }
+    .hero-ornament::after {
+      content: '';
+      position: absolute;
+      inset: 30px;
+      border-radius: 50%;
+      border: 1px solid rgba(184,150,90,0.08);
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      margin: 40px 0;
+    }
+    .divider--center { margin-inline: auto; }
+
+    /* ── SECTIONS ── */
+    section { padding: 100px 0; }
+    section + section { padding-top: 0; }
+
+    /* GROW */
+    .section-grow {
+      background: var(--warm-white);
+    }
+    .section-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .section-grow h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+      font-weight: 400;
+      line-height: 1.25;
+    }
+    .lead {
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--muted);
+      margin-top: 20px;
+      line-height: 1.8;
+    }
+    .body-text {
+      margin-top: 24px;
+      color: #3a3835;
+      line-height: 1.85;
+    }
+    .italic-pull {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.15em;
+      color: var(--gold);
+      margin-top: 28px;
+      display: block;
+    }
+
+    /* REALITY LIST */
+    .reality-list {
+      list-style: none;
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .reality-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      font-size: 16px;
+      color: #3a3835;
+    }
+    .reality-list li::before {
+      content: '';
+      flex-shrink: 0;
+      margin-top: 10px;
+      width: 20px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    /* QUESTIONS SECTION */
+    .section-questions {
+      background: var(--black);
+      color: var(--off-white);
+    }
+    .section-questions .section-label { color: var(--gold); }
+    .section-questions h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+      font-weight: 400;
+      line-height: 1.25;
+    }
+    .question-stack {
+      margin-top: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .q-item {
+      padding: 22px 0;
+      border-top: 1px solid rgba(245,242,236,0.1);
+      font-size: 15px;
+      color: rgba(245,242,236,0.55);
+      font-weight: 300;
+      transition: color 0.3s;
+    }
+    .q-item:last-child { border-bottom: 1px solid rgba(245,242,236,0.1); }
+    .q-item strong {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: 1.15em;
+      font-weight: 400;
+      color: var(--off-white);
+      margin-bottom: 4px;
+    }
+    .if-block {
+      margin-top: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .if-item {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: rgba(245,242,236,0.7);
+      line-height: 1.5;
+      padding-left: 20px;
+      border-left: 2px solid var(--gold);
+    }
+    .if-conclusion {
+      margin-top: 32px;
+      font-size: 16px;
+      color: var(--gold-light);
+      font-weight: 300;
+    }
+
+    /* ORIGIN */
+    .section-origin { background: var(--off-white); }
+    .year-badge {
+      display: inline-block;
+      font-family: var(--font-serif);
+      font-size: clamp(4rem, 12vw, 8rem);
+      font-weight: 700;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--border);
+      line-height: 1;
+      margin-bottom: -16px;
+      user-select: none;
+      pointer-events: none;
+    }
+    .section-origin h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+      font-weight: 400;
+      line-height: 1.25;
+    }
+    .pull-quote {
+      margin-top: 40px;
+      padding: 32px;
+      border: 1px solid var(--border);
+      background: var(--warm-white);
+    }
+    .pull-quote p {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+      line-height: 1.55;
+      color: var(--black);
+    }
+
+    /* BENEFITS */
+    .section-benefits { background: var(--warm-white); }
+    .section-benefits h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+      font-weight: 400;
+      line-height: 1.25;
+    }
+    .benefits-grid {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    .benefit-item {
+      padding: 28px 0;
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+    .benefit-item:last-child { border-bottom: 1px solid var(--border); }
+    .benefit-num {
+      font-family: var(--font-serif);
+      font-size: 12px;
+      color: var(--gold);
+      padding-top: 3px;
+    }
+    .benefit-text strong {
+      display: block;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      margin-bottom: 4px;
+    }
+    .benefit-text p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* FUTURE */
+    .section-future {
+      background: var(--black);
+      color: var(--off-white);
+    }
+    .section-future h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+      font-weight: 400;
+      line-height: 1.25;
+    }
+    .section-future .body-text { color: rgba(245,242,236,0.65); }
+    .future-highlight {
+      margin-top: 36px;
+      padding: 28px 32px;
+      border-left: 2px solid var(--gold);
+    }
+    .future-highlight p {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: var(--off-white);
+      line-height: 1.6;
+    }
+
+    /* INVITATION */
+    .section-invitation { background: var(--warm-white); }
+    .section-invitation h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+      font-weight: 400;
+      line-height: 1.25;
+    }
+    .who-list {
+      list-style: none;
+      margin-top: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .who-list li {
+      padding: 18px 0;
+      border-top: 1px solid var(--border);
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(1rem, 2.2vw, 1.2rem);
+      color: var(--black);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .who-list li:last-child { border-bottom: 1px solid var(--border); }
+    .who-list li::before {
+      content: '→';
+      color: var(--gold);
+      font-style: normal;
+      font-family: var(--font-sans);
+      flex-shrink: 0;
+    }
+    .invitation-close {
+      margin-top: 32px;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.05em;
+      color: var(--gold);
+    }
+
+    /* FORM SECTION */
+    .section-form {
+      background: var(--off-white);
+      padding-bottom: 120px;
+    }
+    .form-inner {
+      text-align: center;
+    }
+    .form-inner .section-label { margin-bottom: 16px; }
+    .form-inner h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 400;
+      line-height: 1.2;
+    }
+    .form-inner h2 em { font-style: italic; color: var(--gold); }
+    .form-inner .lead {
+      margin-inline: auto;
+      max-width: 460px;
+    }
+    .divider--center { margin-top: 36px; margin-bottom: 36px; }
+    .form-note {
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    form {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 440px;
+      margin-inline: auto;
+    }
+    .input-row {
+      display: flex;
+      gap: 12px;
+    }
+    input[type="text"],
+    input[type="email"] {
+      width: 100%;
+      padding: 14px 18px;
+      border: 1px solid var(--border);
+      background: var(--warm-white);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--black);
+      outline: none;
+      transition: border-color 0.2s;
+      border-radius: 0;
+      -webkit-appearance: none;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus {
+      border-color: var(--gold);
+    }
+    input::placeholder { color: #b0aca5; }
+    button[type="submit"] {
+      width: 100%;
+      padding: 16px 32px;
+      background: var(--black);
+      color: var(--off-white);
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    button[type="submit"]:hover { background: #222; transform: translateY(-1px); }
+    button[type="submit"]:active { transform: translateY(0); }
+
+    .success-msg {
+      display: none;
+      padding: 24px 32px;
+      border: 1px solid var(--gold);
+      text-align: center;
+      max-width: 440px;
+      margin-inline: auto;
+      margin-top: 20px;
+    }
+    .success-msg p {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.1em;
+      color: var(--black);
+    }
+    .success-msg.visible { display: block; }
+
+    /* FOOTER */
+    footer {
+      padding: 48px 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      background: var(--warm-white);
+    }
+    footer .logo span { margin-top: 2px; }
+    .footer-copy {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-in-delay-1 { transition-delay: 0.1s; }
+    .fade-in-delay-2 { transition-delay: 0.2s; }
+    .fade-in-delay-3 { transition-delay: 0.3s; }
+    .fade-in-delay-4 { transition-delay: 0.45s; }
+
+    /* ── RESPONSIVE ── */
+    @media (min-width: 600px) {
+      .input-row { flex-direction: row; }
+      .benefits-grid { grid-template-columns: 1fr 1fr; }
+      .benefit-item:nth-child(even) { border-left: 1px solid var(--border); padding-left: 28px; }
+    }
+
+    @media (max-width: 480px) {
+      section { padding: 72px 0; }
+      .hero { padding-bottom: 60px; }
+      .hero-ornament { display: none; }
+      .pull-quote { padding: 24px; }
+      .future-highlight { padding: 24px; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header id="site-header">
+    <a href="#" class="logo">
+      Finca Cárdenas
+      <span>Aceite de Oliva Virgen Extra</span>
+    </a>
+    <a href="#unirse" class="header-cta">Acompañar la historia</a>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-ornament"></div>
+    <div class="container">
+      <p class="hero-year fade-in">Desde 1974 · Tercera Generación</p>
+      <h1 class="fade-in fade-in-delay-1">
+        Hay historias que se cuentan<br>
+        cuando terminan.<br>
+        <em>Nosotros hemos decidido<br>contarte esta mientras sucede.</em>
+      </h1>
+      <p class="hero-sub fade-in fade-in-delay-2">
+        Esta historia está escrita por la tierra, los olivos y por las generaciones que la han cuidado durante décadas.
+      </p>
+      <div class="hero-actions fade-in fade-in-delay-3">
+        <a href="#unirse" class="btn-primary">Acompañar desde el principio</a>
+        <span class="scroll-hint">Descubre la historia ↓</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 1: VER CRECER -->
+  <section class="section-grow">
+    <div class="container">
+      <p class="section-label fade-in">La realidad</p>
+      <h2 class="fade-in fade-in-delay-1">Hay cosas que solo las entiendes cuando las ves crecer</h2>
+      <p class="lead fade-in fade-in-delay-2">
+        La mayoría de personas descubre el aceite cuando ya está embotellado.<br>
+        Pero para entonces la historia ya ha terminado.
+      </p>
+      <div class="divider fade-in fade-in-delay-3"></div>
+      <p class="body-text fade-in">
+        Nosotros queremos enseñarte algo mucho más raro.
+      </p>
+      <em class="italic-pull fade-in">La realidad.</em>
+      <ul class="reality-list">
+        <li class="fade-in">Verás los olivos cuando florecen</li>
+        <li class="fade-in fade-in-delay-1">Cuando crecen</li>
+        <li class="fade-in fade-in-delay-2">Cómo evoluciona la finca durante el año</li>
+        <li class="fade-in fade-in-delay-3">La finca tal y como es, sin filtros</li>
+      </ul>
+      <p class="body-text fade-in" style="margin-top:32px; font-family: var(--font-serif); font-style:italic; color: var(--muted);">
+        Porque creemos que la realidad ya es suficientemente interesante.
+      </p>
+    </div>
+  </section>
+
+  <!-- SECTION 2: QUESTIONS -->
+  <section class="section-questions">
+    <div class="container">
+      <p class="section-label fade-in">Pregúntate esto</p>
+      <h2 class="fade-in fade-in-delay-1">¿Cuánto sabes sobre una botella de aceite?</h2>
+
+      <div class="question-stack fade-in fade-in-delay-2">
+        <div class="q-item">
+          <strong>Probablemente sabes dónde la compras</strong>
+        </div>
+        <div class="q-item">
+          <strong>Quizás conozcas la variedad</strong>
+        </div>
+        <div class="q-item">
+          <strong>Tal vez incluso el sabor</strong>
+        </div>
+        <div class="q-item">
+          <strong>Pero…</strong>
+          ¿Has visto alguna vez esos árboles? ¿Sabes dónde están o cómo han evolucionado esos olivos? ¿Conoces a quien cuidó esos árboles durante todo el año?
+        </div>
+      </div>
+
+      <p class="body-text fade-in" style="color: rgba(245,242,236,0.55); margin-top: 32px;">
+        Solo ves una etiqueta. Y nosotros creemos que debería ser al revés.<br>
+        <strong style="color: var(--off-white); font-weight:400;">Primero debe existir la historia, y luego el producto.</strong>
+      </p>
+
+      <div class="if-block">
+        <p class="if-item fade-in">¿Y si pudieras seguir una cosecha desde el primer día?</p>
+        <p class="if-item fade-in fade-in-delay-1">¿Y si supieras por qué una campaña sale mejor que otra?</p>
+        <p class="if-item fade-in fade-in-delay-2">¿Y si entendieras qué ocurre en un olivo durante todo un año?</p>
+      </div>
+
+      <p class="if-conclusion fade-in">Eso es exactamente lo que estamos construyendo.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 3: ORIGEN -->
+  <section class="section-origin">
+    <div class="container">
+      <div class="year-badge fade-in" aria-hidden="true">1974</div>
+      <p class="section-label fade-in">El origen</p>
+      <h2 class="fade-in fade-in-delay-1">Todo tiene un origen</h2>
+      <p class="body-text fade-in fade-in-delay-2">
+        Nuestra historia no empezó con una marca, ni con una botella.<br>
+        Empezó trabajando esta tierra generación tras generación.
+      </p>
+      <p class="body-text fade-in fade-in-delay-2">
+        En 1974 llegaron los primeros olivos y desde entonces la finca ha seguido creciendo, adaptándose y evolucionando sin perder nunca lo más importante: el respeto por aquello que nos ha traído hasta aquí.
+      </p>
+      <p class="body-text fade-in fade-in-delay-3">
+        Hoy somos la tercera generación que camina entre estos árboles y también la primera que ha decidido enseñarlo todo.
+      </p>
+      <div class="pull-quote fade-in">
+        <p>No somos una empresa que decidió contar una historia.<br>Somos una historia que ha decidido contarse.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: BENEFICIOS -->
+  <section class="section-benefits">
+    <div class="container">
+      <p class="section-label fade-in">Lo que recibirás</p>
+      <h2 class="fade-in fade-in-delay-1">Si decides acompañarnos</h2>
+
+      <div class="benefits-grid">
+        <div class="benefit-item fade-in">
+          <span class="benefit-num">01</span>
+          <div class="benefit-text">
+            <strong>La evolución real de los olivos</strong>
+            <p>Seguirás el ciclo completo de nuestros árboles, sin editar ni embellecer.</p>
+          </div>
+        </div>
+        <div class="benefit-item fade-in fade-in-delay-1">
+          <span class="benefit-num">02</span>
+          <div class="benefit-text">
+            <strong>Fotografías que no salen de la finca</strong>
+            <p>Momentos auténticos que normalmente quedan entre nosotros.</p>
+          </div>
+        </div>
+        <div class="benefit-item fade-in fade-in-delay-2">
+          <span class="benefit-num">03</span>
+          <div class="benefit-text">
+            <strong>Curiosidades de décadas</strong>
+            <p>Lo que llevamos años aprendiendo, contado sin filtros académicos.</p>
+          </div>
+        </div>
+        <div class="benefit-item fade-in fade-in-delay-3">
+          <span class="benefit-num">04</span>
+          <div class="benefit-text">
+            <strong>Historias del campo</strong>
+            <p>Lo que rara vez llega al consumidor final: decisiones, errores, descubrimientos.</p>
+          </div>
+        </div>
+        <div class="benefit-item fade-in">
+          <span class="benefit-num">05</span>
+          <div class="benefit-text">
+            <strong>Las decisiones que tomamos</strong>
+            <p>Y por qué las tomamos. Transparencia total sobre cómo gestionamos la finca.</p>
+          </div>
+        </div>
+        <div class="benefit-item fade-in fade-in-delay-1">
+          <span class="benefit-num">06</span>
+          <div class="benefit-text">
+            <strong>Acceso desde el primer día</strong>
+            <p>Serás parte de la comunidad antes de que exista la botella.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: FUTURO -->
+  <section class="section-future">
+    <div class="container">
+      <p class="section-label fade-in">El futuro</p>
+      <h2 class="fade-in fade-in-delay-1">Dentro de unos años</h2>
+      <p class="body-text fade-in fade-in-delay-2">
+        Quizás exista una botella de aceite de Finca Cárdenas.<br>
+        Quizás la tengas en tus manos.
+      </p>
+      <p class="body-text fade-in fade-in-delay-2">
+        Pero si has llegado hasta aquí, esa botella significa algo diferente para ti.
+      </p>
+      <div class="future-highlight fade-in fade-in-delay-3">
+        <p>Porque no verás solamente el aceite.<br>
+        Verás árboles que conoces.<br>
+        Verás una historia que has acompañado.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: INVITACIÓN -->
+  <section class="section-invitation">
+    <div class="container">
+      <p class="section-label fade-in">Una invitación</p>
+      <h2 class="fade-in fade-in-delay-1">No queremos clientes.<br>Todavía no.</h2>
+      <p class="body-text fade-in fade-in-delay-2">Queremos personas curiosas:</p>
+
+      <ul class="who-list">
+        <li class="fade-in">Que quieran aprender</li>
+        <li class="fade-in fade-in-delay-1">Que disfruten entendiendo cómo nacen las cosas</li>
+        <li class="fade-in fade-in-delay-2">Que valoren la autenticidad en un mundo cada vez más artificial</li>
+      </ul>
+
+      <p class="invitation-close fade-in">Si eres una de ellas, estás en el lugar correcto.</p>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section class="section-form" id="unirse">
+    <div class="container">
+      <div class="form-inner">
+        <p class="section-label fade-in">Únete</p>
+        <h2 class="fade-in fade-in-delay-1">
+          Acompaña esta historia<br>
+          <em>desde el principio</em>
+        </h2>
+        <p class="lead fade-in fade-in-delay-2">
+          Cada semana compartiremos lo que ocurre realmente en la finca.<br>
+          Sin publicidad. Solo olivos, campo y una historia que sigue escribiéndose.
+        </p>
+        <div class="divider divider--center fade-in fade-in-delay-3"></div>
+
+        <form id="signup-form" class="fade-in" novalidate>
+          <div class="input-row">
+            <input type="text" name="nombre" placeholder="Tu nombre" autocomplete="given-name" required />
+          </div>
+          <input type="email" name="email" placeholder="Tu correo electrónico" autocomplete="email" required />
+          <button type="submit">Acompañar la historia →</button>
+          <p class="form-note">Sin spam. Sin publicidad. Puedes darte de baja cuando quieras.</p>
+        </form>
+
+        <div class="success-msg" id="success-msg">
+          <p>Bienvenido a la historia.<br>Nos alegra tenerte aquí.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="#" class="logo">
+      Finca Cárdenas
+      <span>Aceite de Oliva Virgen Extra · Desde 1974</span>
+    </a>
+    <p class="footer-copy">© 2024 Finca Cárdenas. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    // Header scroll effect
+    const header = document.getElementById('site-header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // Intersection observer for fade-in animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Hero elements visible immediately
+    document.querySelectorAll('.hero .fade-in').forEach(el => {
+      setTimeout(() => el.classList.add('visible'), 100);
+    });
+
+    // Form submission
+    document.getElementById('signup-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = this.querySelector('[name="email"]').value.trim();
+      const nombre = this.querySelector('[name="nombre"]').value.trim();
+      if (!email || !email.includes('@')) {
+        this.querySelector('[name="email"]').focus();
+        return;
+      }
+      // Hide form, show success
+      this.style.display = 'none';
+      document.getElementById('success-msg').classList.add('visible');
+      // Here you would integrate with your email service (Mailchimp, ConvertKit, etc.)
+      console.log('New subscriber:', { nombre, email });
+    });
+  </script>
+</body>
+</html>
