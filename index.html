@@ -131,7 +131,7 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      background-image: url('https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2011_06_13.png');
+      background-image: url('https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2010_51_53.png');
       background-size: cover;
       background-position: center 40%;
       transform: scale(1.04);
@@ -407,23 +407,47 @@
       line-height: 1.55;
     }
 
-    /* ─── PHOTO STRIP (landscape) ─── */
-    .photo-strip {
+    /* ─── ORIGIN PHOTO + PLACA ─── */
+    .origin-photo {
+      margin-top: 56px;
       width: 100%;
-      height: clamp(200px, 38vw, 460px);
+      height: clamp(220px, 42vw, 520px);
       overflow: hidden;
       position: relative;
       background: var(--navy-deep);
     }
-    .photo-strip img {
+    .origin-photo img {
       width: 100%; height: 100%;
       object-fit: cover;
-      object-position: center 60%;
+      object-position: center 55%;
       display: block;
       opacity: 0;
-      transition: opacity 0.5s;
+      transition: opacity 0.6s;
     }
-    .photo-strip img.loaded { opacity: 1; }
+    .origin-photo img.loaded { opacity: 1; }
+
+    .placa-wrap {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: 40px;
+      padding: 24px 28px;
+      background: var(--cream);
+      border: 1px solid var(--border);
+    }
+    .placa-img {
+      height: 80px;
+      width: auto;
+      flex-shrink: 0;
+      display: block;
+    }
+    .placa-caption {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
 
     /* ─── SECTION: BENEFICIOS ─── */
     .section-benefits { background: var(--cream); }
@@ -640,9 +664,8 @@
   <!-- ─── HEADER ─── -->
   <header id="site-header">
     <a href="#" class="logo-link" aria-label="Finca Cárdenas — inicio">
-      <!-- Logo PNG — coloca assets/logo.png en tu repositorio -->
       <img
-        src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/Captura%20de%20pantalla%202026-06-11%20101957.png"
+        src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2010_48_55.png"
         alt="Finca Cárdenas"
         class="logo-img"
         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
@@ -712,20 +735,20 @@
     </div>
     <div class="photo-grid">
       <div class="photo-cell fade-in">
-        <img src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2010_48_55.png" alt="Olivos en flor — Finca Cárdenas" loading="lazy" />
-        <span class="photo-caption">La floración</span>
+        <img src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2010_51_32.png" alt="Primavera en la finca — Finca Cárdenas" loading="lazy" />
+        <span class="photo-caption">La primavera</span>
       </div>
       <div class="photo-cell fade-in d1">
-        <img src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2010_51_32.png" alt="Brotes de olivo — Finca Cárdenas" loading="lazy" />
-        <span class="photo-caption">Los primeros brotes</span>
+        <img src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2010_51_44.png" alt="Los olivos de Finca Cárdenas" loading="lazy" />
+        <span class="photo-caption">Los olivos</span>
       </div>
       <div class="photo-cell fade-in d2">
-        <img src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2010_51_44.png" alt="Aceitunas verdes en el árbol — Finca Cárdenas" loading="lazy" />
-        <span class="photo-caption">El fruto</span>
+        <img src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2010_52_01.png" alt="La perdiz en la finca — Finca Cárdenas" loading="lazy" />
+        <span class="photo-caption">La vida en la finca</span>
       </div>
       <div class="photo-cell fade-in d3">
-        <img src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2010_51_53.png" alt="Vida en la finca — perdiz entre los olivos" loading="lazy" />
-        <span class="photo-caption">La vida en la finca</span>
+        <img src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2010_53_00.png" alt="El fruto — aceitunas Finca Cárdenas" loading="lazy" />
+        <span class="photo-caption">El fruto</span>
       </div>
     </div>
   </section>
@@ -783,12 +806,29 @@
         <p>No somos una empresa que decidió contar una historia.<br>Somos una historia que ha decidido contarse.</p>
       </div>
     </div>
-  </section>
 
-  <!-- ─── FOTO STRIP ─── -->
-  <div class="photo-strip">
-    <img src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2010_54_59.png" alt="La finca Cárdenas" loading="lazy" />
-  </div>
+    <!-- Panorámica Sierra Nevada -->
+    <div class="origin-photo fade-in">
+      <img
+        src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2011_06_13.png"
+        alt="Los olivos de Finca Cárdenas con Sierra Nevada al fondo"
+        loading="lazy"
+      />
+    </div>
+
+    <!-- Placa histórica -->
+    <div class="container">
+      <div class="placa-wrap fade-in">
+        <img
+          src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/Captura%20de%20pantalla%202026-06-11%20101957.png"
+          alt="Placa histórica — Cortijo de Cárdenas, fundado en 1979"
+          class="placa-img"
+          loading="lazy"
+        />
+        <p class="placa-caption">Cortijo de Cárdenas — Fundado en 1979</p>
+      </div>
+    </div>
+  </section>
 
   <!-- ─── BENEFICIOS ─── -->
   <section class="section-benefits">
@@ -918,7 +958,7 @@
     // Hero BG lazy-load with zoom effect
     const heroBg = document.getElementById('hero-bg');
     const img = new Image();
-    img.src = 'https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2011_06_13.png';
+    img.src = 'https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2010_51_53.png';
     img.onload = () => heroBg.classList.add('loaded');
 
     // Lazy-load all images with loaded class
