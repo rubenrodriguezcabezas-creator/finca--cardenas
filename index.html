@@ -65,15 +65,15 @@
       text-decoration: none;
     }
     .logo-img {
-      height: 80px;
+      height: 100px;
       width: auto;
       display: block;
-      filter: drop-shadow(0 2px 12px rgba(0,0,0,0.5)) brightness(1.08);
-      transition: filter 0.3s;
+      filter: drop-shadow(0 2px 16px rgba(0,0,0,0.6)) brightness(1.1);
+      transition: filter 0.3s, height 0.3s;
     }
     header.scrolled .logo-img {
       filter: none;
-      height: 56px;
+      height: 60px;
     }
     .logo-img-fallback {
       display: none;
@@ -474,11 +474,14 @@
 
     /* ─── ORIGIN LAYOUT ─── */
     .origin-illustration {
+      display: block;
       width: 100%;
-      margin-top: 36px;
-      margin-bottom: 8px;
+      margin-top: 32px;
+      margin-bottom: 36px;
       overflow: hidden;
       background: var(--cream-dark);
+      float: none;
+      clear: both;
     }
     .origin-illustration img {
       width: 100%;
@@ -517,36 +520,53 @@
     }
 
     /* ─── SECTION: BENEFICIOS ─── */
-    .section-benefits { background: var(--cream); }
-    .benefits-list { margin-top: 48px; }
-    .benefit-item {
-      padding: 26px 0;
-      border-top: 1px solid var(--border);
+    .section-benefits { background: var(--navy); }
+    .section-benefits .section-label { color: var(--gold); }
+    .section-benefits h2 { color: var(--cream); }
+    .benefits-grid {
+      margin-top: 52px;
       display: grid;
-      grid-template-columns: 28px 1fr;
-      gap: 22px;
-      align-items: start;
+      grid-template-columns: 1fr;
+      gap: 24px;
     }
-    .benefit-item:last-child { border-bottom: 1px solid var(--border); }
+    @media (min-width: 520px) { .benefits-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px) { .benefits-grid { grid-template-columns: repeat(3, 1fr); } }
+    .benefit-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(190,150,89,0.25);
+      border-top: 3px solid var(--gold);
+      border-radius: 4px;
+      padding: 32px 28px 28px;
+      transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+      cursor: default;
+    }
+    .benefit-card:hover {
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+    }
     .benefit-num {
       font-family: var(--font-serif);
-      font-size: 13px;
+      font-size: 11px;
       font-weight: 300;
+      letter-spacing: 0.12em;
       color: var(--gold);
-      padding-top: 2px;
-    }
-    .benefit-text strong {
+      margin-bottom: 14px;
       display: block;
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      color: var(--navy);
-      margin-bottom: 5px;
     }
-    .benefit-text p {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.7;
+    .benefit-card strong {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .benefit-card p {
+      font-size: 13px;
+      color: rgba(246,238,229,0.62);
+      line-height: 1.75;
     }
 
     /* ─── SECTION: FUTURO ─── */
@@ -710,8 +730,7 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
       }
-      .benefit-item:nth-child(odd) { border-right: 1px solid var(--border); padding-right: 28px; }
-      .benefit-item:nth-child(even) { padding-left: 28px; }
+      /* benefits grid handled by benefits-grid class */
     }
     @media (min-width: 900px) {
       .photo-grid { grid-template-columns: repeat(4, 1fr); }
@@ -920,48 +939,36 @@
     <div class="container">
       <p class="section-label fade-in">Lo que recibirás</p>
       <h2 class="serif fade-in d1">Si decides acompañarnos</h2>
-      <div class="benefits-list">
-        <div class="benefit-item fade-in">
+      <div class="benefits-grid">
+        <div class="benefit-card fade-in">
           <span class="benefit-num">01</span>
-          <div class="benefit-text">
-            <strong>La evolución real de los olivos</strong>
-            <p>El ciclo completo de nuestros árboles, sin editar ni embellecer.</p>
-          </div>
+          <strong>La evolución real de los olivos</strong>
+          <p>El ciclo completo de nuestros árboles, sin editar ni embellecer.</p>
         </div>
-        <div class="benefit-item fade-in d1">
+        <div class="benefit-card fade-in d1">
           <span class="benefit-num">02</span>
-          <div class="benefit-text">
-            <strong>Fotografías que no salen de la finca</strong>
-            <p>Momentos auténticos que normalmente quedan entre nosotros.</p>
-          </div>
+          <strong>Fotografías que no salen de la finca</strong>
+          <p>Momentos auténticos que normalmente quedan entre nosotros.</p>
         </div>
-        <div class="benefit-item fade-in d2">
+        <div class="benefit-card fade-in d2">
           <span class="benefit-num">03</span>
-          <div class="benefit-text">
-            <strong>Curiosidades de décadas</strong>
-            <p>Lo que llevamos años aprendiendo, contado sin filtros.</p>
-          </div>
+          <strong>Curiosidades de décadas</strong>
+          <p>Lo que llevamos años aprendiendo, contado sin filtros.</p>
         </div>
-        <div class="benefit-item fade-in d3">
+        <div class="benefit-card fade-in d3">
           <span class="benefit-num">04</span>
-          <div class="benefit-text">
-            <strong>Historias del campo</strong>
-            <p>Decisiones, errores, descubrimientos — lo que rara vez llega al consumidor.</p>
-          </div>
+          <strong>Historias del campo</strong>
+          <p>Decisiones, errores, descubrimientos — lo que rara vez llega al consumidor.</p>
         </div>
-        <div class="benefit-item fade-in">
+        <div class="benefit-card fade-in">
           <span class="benefit-num">05</span>
-          <div class="benefit-text">
-            <strong>Las decisiones que tomamos</strong>
-            <p>Y por qué las tomamos. Transparencia total sobre la gestión de la finca.</p>
-          </div>
+          <strong>Las decisiones que tomamos</strong>
+          <p>Y por qué las tomamos. Transparencia total sobre la gestión de la finca.</p>
         </div>
-        <div class="benefit-item fade-in d1">
+        <div class="benefit-card fade-in d1">
           <span class="benefit-num">06</span>
-          <div class="benefit-text">
-            <strong>Acceso desde el primer día</strong>
-            <p>Serás parte de la comunidad antes de que exista la botella.</p>
-          </div>
+          <strong>Acceso desde el primer día</strong>
+          <p>Serás parte de la comunidad antes de que exista la botella.</p>
         </div>
       </div>
     </div>
