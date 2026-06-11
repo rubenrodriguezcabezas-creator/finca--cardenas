@@ -46,11 +46,12 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      padding: 16px 28px;
+      padding: 12px 28px;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: background 0.4s, box-shadow 0.4s;
+      background: linear-gradient(to bottom, rgba(3,26,61,0.55), transparent);
     }
     header.scrolled {
       background: rgba(246,238,229,0.97);
@@ -64,14 +65,15 @@
       text-decoration: none;
     }
     .logo-img {
-      height: 72px;
+      height: 80px;
       width: auto;
       display: block;
-      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.35));
+      filter: drop-shadow(0 2px 12px rgba(0,0,0,0.5)) brightness(1.08);
       transition: filter 0.3s;
     }
     header.scrolled .logo-img {
       filter: none;
+      height: 56px;
     }
     .logo-img-fallback {
       display: none;
@@ -98,9 +100,7 @@
     header.scrolled .logo-name { color: var(--navy); }
     header.scrolled .logo-sub  { color: var(--olive); }
 
-    .header-cta {
-      display: none; /* Hidden — CTA is in the hero */
-    }
+    .header-cta { display: none; }
 
     /* ─── HERO ─── */
     .hero {
@@ -117,7 +117,7 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      background-image: url('https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2010_51_53.png');
+      background-image: url('https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2011_06_13.png');
       background-size: cover;
       background-position: center 40%;
       transform: scale(1.04);
@@ -396,88 +396,116 @@
     /* ─── MINI FORM ─── */
     .section-mini-form {
       background: var(--navy);
-      padding: 56px 0;
+      padding: 64px 0;
     }
     .mini-form-inner {
       display: flex;
-      align-items: center;
-      gap: 24px;
+      align-items: flex-start;
+      gap: 48px;
       flex-wrap: wrap;
     }
+    .mini-form-text {
+      flex: 1;
+      min-width: 220px;
+    }
+    .mini-form-text .section-label { color: var(--gold); }
     .mini-form-label {
       font-family: var(--font-serif);
-      font-style: italic;
-      font-size: 1.3rem;
+      font-size: clamp(1.5rem, 3vw, 2rem);
       font-weight: 300;
       color: var(--cream);
-      flex: 1;
-      min-width: 200px;
+      line-height: 1.25;
+      margin-top: 8px;
+    }
+    .mini-form-sub {
+      margin-top: 10px;
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(246,238,229,0.45);
+      line-height: 1.7;
     }
     #mini-form {
       display: flex;
-      gap: 0;
-      flex: 2;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
       min-width: 260px;
       margin: 0;
-      max-width: 100%;
+      max-width: 380px;
     }
-    #mini-form input[type="email"] {
-      flex: 1;
-      border-right: none;
+    #mini-form input {
+      width: 100%;
       padding: 14px 18px;
+      border: 1px solid rgba(246,238,229,0.18);
+      background: rgba(246,238,229,0.05);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--cream);
+      outline: none;
+      transition: border-color 0.2s;
     }
+    #mini-form input:focus { border-color: var(--gold); }
+    #mini-form input::placeholder { color: rgba(246,238,229,0.28); }
     #mini-form button {
-      padding: 14px 28px;
+      padding: 15px 28px;
       background: var(--gold);
       color: var(--navy-deep);
       font-family: var(--font-sans);
       font-size: 11px;
       font-weight: 600;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       border: none;
       cursor: pointer;
-      white-space: nowrap;
       transition: background 0.2s;
+      margin-top: 2px;
     }
     #mini-form button:hover { background: var(--gold-light); }
     .mini-success {
       display: none;
       font-family: var(--font-serif);
       font-style: italic;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       color: var(--gold-light);
-      flex: 2;
+      line-height: 1.6;
     }
     .mini-success.visible { display: block; }
 
-    /* ─── ORIGIN PHOTO + PLACA ─── */
-    .origin-photo {
-      margin-top: 56px;
-      width: 100%;
-      background: var(--cream-dark);
-      overflow: hidden;
+    /* ─── ORIGIN LAYOUT ─── */
+    .origin-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+      margin-top: 48px;
     }
-    .origin-photo img {
+    .origin-illustration {
+      width: 100%;
+      border-radius: 2px;
+      overflow: hidden;
+      background: var(--cream-dark);
+    }
+    .origin-illustration img {
       width: 100%;
       height: auto;
       display: block;
       opacity: 0;
       transition: opacity 0.6s;
     }
-    .origin-photo img.loaded { opacity: 1; }
+    .origin-illustration img.loaded { opacity: 1; }
 
     .placa-wrap {
       display: flex;
       align-items: center;
-      gap: 20px;
-      margin-top: 40px;
-      padding: 24px 28px;
+      gap: 16px;
+      margin-top: 32px;
+      padding: 20px 24px;
       background: var(--cream);
       border: 1px solid var(--border);
     }
     .placa-img {
-      height: 80px;
+      height: 64px;
       width: auto;
       flex-shrink: 0;
       display: block;
@@ -485,9 +513,13 @@
     .placa-caption {
       font-family: var(--font-serif);
       font-style: italic;
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: var(--muted);
       line-height: 1.5;
+    }
+
+    @media (max-width: 640px) {
+      .origin-cols { grid-template-columns: 1fr; gap: 32px; }
     }
 
     /* ─── SECTION: BENEFICIOS ─── */
@@ -797,13 +829,18 @@
   <section class="section-mini-form">
     <div class="container">
       <div class="mini-form-inner fade-in">
-        <p class="mini-form-label">No te pierdas lo que viene</p>
+        <div class="mini-form-text">
+          <p class="section-label">Únete ahora</p>
+          <p class="mini-form-label">No te pierdas<br>lo que viene</p>
+          <p class="mini-form-sub">Cada semana, lo que ocurre realmente en la finca.<br>Sin publicidad, solo la historia.</p>
+        </div>
         <form id="mini-form" novalidate>
-          <input type="email" name="email" placeholder="Tu correo electrónico" autocomplete="email" required />
-          <button type="submit">Acompañar →</button>
+          <input type="text"  name="nombre" placeholder="Tu nombre" autocomplete="given-name" required />
+          <input type="email" name="email"  placeholder="Tu correo electrónico" autocomplete="email" required />
+          <button type="submit">Acompañar la historia →</button>
         </form>
         <div class="mini-success" id="mini-success">
-          <p>¡Bienvenido a la historia!</p>
+          Bienvenido a la historia.<br>Nos alegra tenerte aquí.
         </div>
       </div>
     </div>
@@ -813,7 +850,7 @@
   <section class="section-questions">
     <div class="container">
       <p class="section-label fade-in">Pregúntate esto</p>
-      <h2 class="serif fade-in d1">¿Cuánto sabes sobre una botella de aceite?</h2>
+      <h2 class="serif fade-in d1">¿Cuánto sabes sobre el aceite que consumes?</h2>
       <div class="q-stack fade-in d2">
         <div class="q-item">
           <strong>Probablemente sabes dónde la compras</strong>
@@ -848,41 +885,42 @@
       <span class="year-outline fade-in" aria-hidden="true">1974</span>
       <p class="section-label fade-in">El origen</p>
       <h2 class="serif fade-in d1">Todo tiene un origen</h2>
-      <p class="body-text fade-in d2">
-        Nuestra historia no empezó con una marca, ni con una botella.<br>
-        Empezó trabajando esta tierra generación tras generación.
-      </p>
-      <p class="body-text fade-in d2">
-        En 1974 llegaron los primeros olivos y desde entonces la finca ha seguido creciendo, adaptándose y evolucionando sin perder nunca lo más importante: el respeto por aquello que nos ha traído hasta aquí.
-      </p>
-      <p class="body-text fade-in d3">
-        Hoy somos la tercera generación que camina entre estos árboles — y también la primera que ha decidido enseñarlo todo.
-      </p>
-      <div class="pull-quote fade-in">
-        <p>No somos una empresa que decidió contar una historia.<br>Somos una historia que ha decidido contarse.</p>
-      </div>
-    </div>
 
-    <!-- Ilustración acuarela de la finca -->
-    <div class="origin-photo fade-in">
-      <img
-        src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/Captura%20de%20pantalla%202026-06-11%20102028.png"
-        alt="Ilustración del Cortijo de Cárdenas"
-        loading="lazy"
-        style="object-fit: contain; background: var(--cream-dark);"
-      />
-    </div>
+      <div class="origin-cols">
+        <!-- Texto -->
+        <div class="fade-in">
+          <p class="body-text" style="margin-top:0;">
+            Nuestra historia no empezó con una marca, ni con una botella.<br>
+            Empezó trabajando esta tierra generación tras generación.
+          </p>
+          <p class="body-text">
+            En 1974 llegaron los primeros olivos y desde entonces la finca ha seguido creciendo, adaptándose y evolucionando sin perder nunca lo más importante: el respeto por aquello que nos ha traído hasta aquí.
+          </p>
+          <p class="body-text">
+            Hoy somos la tercera generación que camina entre estos árboles — y también la primera que ha decidido enseñarlo todo.
+          </p>
+          <div class="pull-quote" style="margin-top:32px;">
+            <p>No somos una empresa que decidió contar una historia.<br>Somos una historia que ha decidido contarse.</p>
+          </div>
+          <div class="placa-wrap fade-in">
+            <img
+              src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/Captura%20de%20pantalla%202026-06-11%20101957.png"
+              alt="Placa histórica — Cortijo de Cárdenas"
+              class="placa-img"
+              loading="lazy"
+            />
+            <p class="placa-caption">Cortijo de Cárdenas<br>Fundado en 1979</p>
+          </div>
+        </div>
 
-    <!-- Placa histórica -->
-    <div class="container">
-      <div class="placa-wrap fade-in">
-        <img
-          src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/Captura%20de%20pantalla%202026-06-11%20101957.png"
-          alt="Placa histórica — Cortijo de Cárdenas, fundado en 1979"
-          class="placa-img"
-          loading="lazy"
-        />
-        <p class="placa-caption">Cortijo de Cárdenas — Fundado en 1979</p>
+        <!-- Ilustración -->
+        <div class="origin-illustration fade-in d1">
+          <img
+            src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/Captura%20de%20pantalla%202026-06-11%20102028.png"
+            alt="Ilustración acuarela del Cortijo de Cárdenas"
+            loading="lazy"
+          />
+        </div>
       </div>
     </div>
   </section>
@@ -1015,7 +1053,7 @@
     // Hero BG lazy-load with zoom effect
     const heroBg = document.getElementById('hero-bg');
     const img = new Image();
-    img.src = 'https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2010_51_53.png';
+    img.src = 'https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2011_06_13.png';
     img.onload = () => heroBg.classList.add('loaded');
 
     // Lazy-load all images with loaded class
@@ -1040,11 +1078,12 @@
     // Mini form
     document.getElementById('mini-form').addEventListener('submit', function(e) {
       e.preventDefault();
-      const email = this.querySelector('[name="email"]').value.trim();
+      const email  = this.querySelector('[name="email"]').value.trim();
+      const nombre = this.querySelector('[name="nombre"]').value.trim();
       if (!email || !email.includes('@')) { this.querySelector('[name="email"]').focus(); return; }
       this.style.display = 'none';
       document.getElementById('mini-success').classList.add('visible');
-      console.log('Mini form subscriber:', { email });
+      console.log('Mini form subscriber:', { nombre, email });
     });
 
     // Main form
