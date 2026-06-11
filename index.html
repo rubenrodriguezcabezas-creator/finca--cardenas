@@ -655,6 +655,28 @@
       line-height: 1.75;
     }
 
+    /* ─── CAROUSEL ─── */
+    .section-carousel { overflow: hidden; line-height: 0; padding: 0; background: var(--navy-deep); }
+    .carousel-track-wrap { overflow: hidden; }
+    .carousel-track {
+      display: flex;
+      gap: 0;
+      will-change: transform;
+    }
+    .carousel-track img {
+      flex-shrink: 0;
+      width: 420px;
+      height: 420px;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.88) saturate(0.9);
+      transition: filter 0.5s;
+    }
+    .carousel-track img:hover { filter: brightness(1) saturate(1.05); }
+    @media (max-width: 600px) {
+      .carousel-track img { width: 280px; height: 280px; }
+    }
+
     /* ─── SECTION: FUTURO ─── */
     .section-future { background: var(--navy); color: var(--cream); }
     .section-future .section-label { color: var(--gold); }
@@ -1186,6 +1208,25 @@
     </div>
   </section>
 
+  <!-- ─── CAROUSEL ─── -->
+  <section class="section-carousel">
+    <div class="carousel-track-wrap">
+      <div class="carousel-track" id="carouselTrack">
+        <img src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2016_07_26.png" alt="" loading="lazy">
+        <img src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2016_07_38.png" alt="" loading="lazy">
+        <img src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2016_45_14.png" alt="" loading="lazy">
+        <img src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2017_29_28.png" alt="" loading="lazy">
+        <img src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2017_37_10.png" alt="" loading="lazy">
+        <!-- duplicadas para loop infinito -->
+        <img src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2016_07_26.png" alt="" loading="lazy">
+        <img src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2016_07_38.png" alt="" loading="lazy">
+        <img src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2016_45_14.png" alt="" loading="lazy">
+        <img src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2017_29_28.png" alt="" loading="lazy">
+        <img src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2017_37_10.png" alt="" loading="lazy">
+      </div>
+    </div>
+  </section>
+
   <!-- ─── FUTURO ─── -->
   <section class="section-future">
     <div class="container">
@@ -1341,6 +1382,23 @@
         }
       }, { threshold: 0.35 });
       yearIO.observe(yearWrap);
+    }
+
+    // Carousel auto-scroll
+    const carouselTrack = document.getElementById('carouselTrack');
+    if (carouselTrack) {
+      const totalItems = 5;
+      let offset = 0;
+      let itemWidth = carouselTrack.querySelector('img').offsetWidth;
+      const speed = 0.5; // px per frame
+      function tickCarousel() {
+        itemWidth = carouselTrack.querySelector('img').offsetWidth;
+        offset += speed;
+        if (offset >= itemWidth * totalItems) offset = 0;
+        carouselTrack.style.transform = `translateX(-${offset}px)`;
+        requestAnimationFrame(tickCarousel);
+      }
+      requestAnimationFrame(tickCarousel);
     }
   </script>
 </body>
