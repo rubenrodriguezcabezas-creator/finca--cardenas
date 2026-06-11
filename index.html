@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.82/build/spline-viewer.js"></script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -257,6 +258,103 @@
       color: var(--gold);
       display: block;
       margin-top: 22px;
+    }
+
+    /* ─── SPLINE 3D ─── */
+    .section-spline {
+      background: var(--navy-deep);
+      padding: 72px 28px;
+    }
+    .spline-card {
+      position: relative;
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+      background: rgba(5,5,10,0.97);
+      border-radius: 10px;
+      overflow: hidden;
+      height: 480px;
+      display: flex;
+      border: 1px solid rgba(190,150,89,0.15);
+    }
+    .spline-spotlight-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      background: radial-gradient(500px circle at var(--mx,-200px) var(--my,-200px), rgba(190,150,89,0.10), transparent 50%);
+      transition: background 0.05s;
+    }
+    .spline-left {
+      flex: 1;
+      padding: 52px 44px;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .spline-left .spline-eyebrow {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+    .spline-left h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+      font-weight: 300;
+      line-height: 1.18;
+      background: linear-gradient(to bottom, #f6eee5 0%, #9a9080 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .spline-left p {
+      margin-top: 18px;
+      font-size: 14px;
+      color: rgba(200,190,180,0.65);
+      line-height: 1.75;
+      max-width: 300px;
+    }
+    .spline-left .spline-cta {
+      margin-top: 32px;
+      display: inline-block;
+      padding: 12px 28px;
+      border: 1px solid rgba(190,150,89,0.4);
+      color: var(--gold);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+      width: fit-content;
+    }
+    .spline-left .spline-cta:hover {
+      border-color: var(--gold);
+      background: rgba(190,150,89,0.08);
+    }
+    .spline-right {
+      flex: 1;
+      position: relative;
+      z-index: 0;
+    }
+    .spline-right spline-viewer {
+      width: 100%;
+      height: 100%;
+      --spline-background: transparent;
+    }
+    @keyframes spotlight-in {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @media (max-width: 640px) {
+      .spline-card { flex-direction: column; height: auto; min-height: 520px; }
+      .spline-left { padding: 36px 28px 20px; }
+      .spline-right { height: 280px; flex: none; }
     }
 
     /* ─── SECTION: VER CRECER ─── */
@@ -925,6 +1023,29 @@
     </div>
   </section>
 
+  <!-- ─── SPLINE 3D ─── -->
+  <section class="section-spline">
+    <div class="spline-card" id="spline-card">
+      <div class="spline-spotlight-layer" id="spline-spotlight"></div>
+
+      <!-- Texto izquierda -->
+      <div class="spline-left fade-in">
+        <span class="spline-eyebrow">Finca Cárdenas · Sierra Nevada</span>
+        <h2>Una historia que<br>puedes tocar</h2>
+        <p>Más de 50 años cultivando olivos entre la sierra y el sol. Explora nuestra finca en tres dimensiones y siente la tierra desde cualquier lugar del mundo.</p>
+        <a href="#unirse" class="spline-cta">Unirme a la historia</a>
+      </div>
+
+      <!-- Escena 3D derecha -->
+      <div class="spline-right">
+        <spline-viewer
+          url="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+          loading="lazy"
+        ></spline-viewer>
+      </div>
+    </div>
+  </section>
+
   <!-- ─── VER CRECER ─── -->
   <section class="section-grow">
     <div class="container">
@@ -1279,6 +1400,21 @@
       // 👉 Conecta aquí tu proveedor de email (Mailchimp, Brevo, ConvertKit…)
       console.log('Nuevo suscriptor:', { nombre, email });
     });
+
+    // Spline card spotlight follow-mouse
+    const splineCard = document.getElementById('spline-card');
+    const splineSpot = document.getElementById('spline-spotlight');
+    if (splineCard && splineSpot) {
+      splineCard.addEventListener('mousemove', (e) => {
+        const r = splineCard.getBoundingClientRect();
+        splineSpot.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        splineSpot.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+      splineCard.addEventListener('mouseleave', () => {
+        splineSpot.style.setProperty('--mx', '-200px');
+        splineSpot.style.setProperty('--my', '-200px');
+      });
+    }
 
     // 1974 calligraphic writing animation
     const yearWrap = document.querySelector('.year-draw-wrap');
