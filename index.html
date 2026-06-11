@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.82/build/spline-viewer.js"></script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -260,110 +259,25 @@
       margin-top: 22px;
     }
 
-    /* ─── SPLINE 3D ─── */
-    .section-spline {
-      background: var(--navy-deep);
-      padding: 72px 28px;
-    }
-    .spline-card {
-      position: relative;
-      width: 100%;
-      max-width: 960px;
-      margin: 0 auto;
-      background: rgba(5,5,10,0.97);
-      border-radius: 10px;
-      overflow: hidden;
-      height: 480px;
-      display: flex;
-      border: 1px solid rgba(190,150,89,0.15);
-    }
-    .spline-spotlight-layer {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-      background: radial-gradient(500px circle at var(--mx,-200px) var(--my,-200px), rgba(190,150,89,0.10), transparent 50%);
-      transition: background 0.05s;
-    }
-    .spline-left {
-      flex: 1;
-      padding: 52px 44px;
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    .spline-left .spline-eyebrow {
-      font-size: 9px;
-      font-weight: 600;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 18px;
-    }
-    .spline-left h2 {
-      font-family: var(--font-serif);
-      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
-      font-weight: 300;
-      line-height: 1.18;
-      background: linear-gradient(to bottom, #f6eee5 0%, #9a9080 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .spline-left p {
-      margin-top: 18px;
-      font-size: 14px;
-      color: rgba(200,190,180,0.65);
-      line-height: 1.75;
-      max-width: 300px;
-    }
-    .spline-left .spline-cta {
-      margin-top: 32px;
-      display: inline-block;
-      padding: 12px 28px;
-      border: 1px solid rgba(190,150,89,0.4);
-      color: var(--gold);
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: border-color 0.2s, background 0.2s;
-      width: fit-content;
-    }
-    .spline-left .spline-cta:hover {
-      border-color: var(--gold);
-      background: rgba(190,150,89,0.08);
-    }
-    .spline-right {
-      flex: 1;
-      position: relative;
-      z-index: 0;
-    }
-    .spline-right spline-viewer {
-      width: 100%;
-      height: 100%;
-      --spline-background: transparent;
-    }
-    @keyframes spotlight-in {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-    @media (max-width: 640px) {
-      .spline-card { flex-direction: column; height: auto; min-height: 520px; }
-      .spline-left { padding: 36px 28px 20px; }
-      .spline-right { height: 280px; flex: none; }
-    }
-
     /* ─── SECTION: VER CRECER ─── */
     .section-grow { background: var(--cream); }
-    .grow-illustration {
-      width: 100%;
-      margin-top: 48px;
+    .grow-trio {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 52px;
+      align-items: end;
     }
-    .grow-illustration img {
+    @media (max-width: 520px) {
+      .grow-trio { grid-template-columns: 1fr; gap: 12px; }
+    }
+    .grow-trio-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .grow-trio-item img {
       width: 100%;
       height: auto;
       display: block;
@@ -371,7 +285,16 @@
       opacity: 0;
       transition: opacity 0.9s ease;
     }
-    .grow-illustration img.loaded { opacity: 1; }
+    .grow-trio-item img.loaded { opacity: 1; }
+    .grow-trio-label {
+      font-family: var(--font-serif);
+      font-size: 13px;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      text-align: center;
+    }
     .reality-list {
       list-style: none;
       margin-top: 32px;
@@ -1023,29 +946,6 @@
     </div>
   </section>
 
-  <!-- ─── SPLINE 3D ─── -->
-  <section class="section-spline">
-    <div class="spline-card" id="spline-card">
-      <div class="spline-spotlight-layer" id="spline-spotlight"></div>
-
-      <!-- Texto izquierda -->
-      <div class="spline-left fade-in">
-        <span class="spline-eyebrow">Finca Cárdenas · Sierra Nevada</span>
-        <h2>Una historia que<br>puedes tocar</h2>
-        <p>Más de 50 años cultivando olivos entre la sierra y el sol. Explora nuestra finca en tres dimensiones y siente la tierra desde cualquier lugar del mundo.</p>
-        <a href="#unirse" class="spline-cta">Unirme a la historia</a>
-      </div>
-
-      <!-- Escena 3D derecha -->
-      <div class="spline-right">
-        <spline-viewer
-          url="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-          loading="lazy"
-        ></spline-viewer>
-      </div>
-    </div>
-  </section>
-
   <!-- ─── VER CRECER ─── -->
   <section class="section-grow">
     <div class="container">
@@ -1067,12 +967,19 @@
       <p class="body-text fade-in" style="margin-top:28px; font-family:var(--font-serif); font-style:italic; color:var(--muted);">
         Porque creemos que la realidad ya es suficientemente interesante.
       </p>
-      <div class="grow-illustration fade-in">
-        <img
-          src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2014_20_59.png"
-          alt="Ilustración acuarela de olivos — Finca Cárdenas"
-          loading="lazy"
-        />
+      <div class="grow-trio">
+        <div class="grow-trio-item fade-in">
+          <img src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/16fc4a01-2d76-44fc-ae48-69a7d6abd472.png" alt="Olivo sin flor — Finca Cárdenas" loading="lazy" />
+          <span class="grow-trio-label">Sin flor</span>
+        </div>
+        <div class="grow-trio-item fade-in d1">
+          <img src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/b8aada58-26e3-4b1e-910d-ae0d1109bfea.png" alt="Olivo en flor — Finca Cárdenas" loading="lazy" />
+          <span class="grow-trio-label">En flor</span>
+        </div>
+        <div class="grow-trio-item fade-in d2">
+          <img src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/f9a13fc7-a343-41da-bf0a-4acee186e228.png" alt="Olivo con aceituna — Finca Cárdenas" loading="lazy" />
+          <span class="grow-trio-label">Con aceituna</span>
+        </div>
       </div>
     </div>
   </section>
@@ -1400,21 +1307,6 @@
       // 👉 Conecta aquí tu proveedor de email (Mailchimp, Brevo, ConvertKit…)
       console.log('Nuevo suscriptor:', { nombre, email });
     });
-
-    // Spline card spotlight follow-mouse
-    const splineCard = document.getElementById('spline-card');
-    const splineSpot = document.getElementById('spline-spotlight');
-    if (splineCard && splineSpot) {
-      splineCard.addEventListener('mousemove', (e) => {
-        const r = splineCard.getBoundingClientRect();
-        splineSpot.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-        splineSpot.style.setProperty('--my', (e.clientY - r.top) + 'px');
-      });
-      splineCard.addEventListener('mouseleave', () => {
-        splineSpot.style.setProperty('--mx', '-200px');
-        splineSpot.style.setProperty('--my', '-200px');
-      });
-    }
 
     // 1974 calligraphic writing animation
     const yearWrap = document.querySelector('.year-draw-wrap');
