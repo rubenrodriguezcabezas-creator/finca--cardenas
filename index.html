@@ -116,14 +116,15 @@
     }
     .hero-bg {
       position: absolute;
-      inset: 0;
+      inset: -15%;
       background-image: url('https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2011_06_13.png');
       background-size: cover;
       background-position: center 40%;
-      transform: scale(1.04);
+      transform: scale(1.04) translateY(0);
       transition: transform 8s ease;
+      will-change: transform;
     }
-    .hero-bg.loaded { transform: scale(1); }
+    .hero-bg.loaded { transform: scale(1) translateY(0); }
     .hero-overlay {
       position: absolute;
       inset: 0;
@@ -712,17 +713,132 @@
     .footer-logo .logo-sub { font-size: 8px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(246,238,229,0.35); margin-top: 4px; }
     .footer-copy { font-size: 11px; font-weight: 300; color: rgba(246,238,229,0.25); }
 
+    /* ─── SCROLL PROGRESS BAR ─── */
+    #scroll-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      z-index: 200;
+      transition: width 0.1s linear;
+      pointer-events: none;
+    }
+
+    /* ─── FILM GRAIN ─── */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.045;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      animation: grain 0.5s steps(2) infinite;
+    }
+    @keyframes grain {
+      0%, 100% { background-position: 0 0; }
+      25%       { background-position: 60px -40px; }
+      50%       { background-position: -30px 70px; }
+      75%       { background-position: 80px 30px; }
+    }
+
+    /* ─── NOISE TEXTURE on dark sections ─── */
+    .section-benefits::before,
+    .section-questions::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 300px 300px;
+    }
+    .section-benefits { position: relative; }
+    .section-questions { position: relative; }
+    .section-benefits .container,
+    .section-questions .container { position: relative; z-index: 1; }
+
+    /* ─── WAVE DIVIDERS ─── */
+    .wave-divider {
+      display: block;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      margin: 0;
+    }
+    .wave-divider svg { display: block; width: 100%; }
+
+    /* ─── SHIMMER on year-outline ─── */
+    @keyframes shimmer {
+      0%   { background-position: -200% center; }
+      100% { background-position:  200% center; }
+    }
+    .year-outline {
+      background: linear-gradient(
+        90deg,
+        var(--gold) 0%,
+        #f0d898 40%,
+        var(--gold) 60%,
+        var(--gold-light) 100%
+      );
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 4s linear infinite;
+    }
+
+    /* ─── PULL-QUOTE gold line animate ─── */
+    .pull-quote {
+      border-left: none;
+      position: relative;
+      padding-left: 28px;
+    }
+    .pull-quote::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0;
+      width: 3px; height: 0;
+      background: var(--gold);
+      transition: height 0.8s ease 0.2s;
+    }
+    .pull-quote.visible::before { height: 100%; }
+
     /* ─── ANIMATIONS ─── */
     .fade-in {
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.75s ease, transform 0.75s ease;
+      transform: translateY(28px);
+      transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1);
     }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
     .d1 { transition-delay: 0.10s; }
-    .d2 { transition-delay: 0.20s; }
-    .d3 { transition-delay: 0.32s; }
-    .d4 { transition-delay: 0.46s; }
+    .d2 { transition-delay: 0.22s; }
+    .d3 { transition-delay: 0.36s; }
+    .d4 { transition-delay: 0.52s; }
+
+    /* benefit cards use slide-up variant */
+    .benefit-card.fade-in {
+      transform: translateY(40px) scale(0.97);
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1), background 0.3s, box-shadow 0.3s;
+    }
+    .benefit-card.fade-in.visible { transform: translateY(0) scale(1); }
+
+    /* photo cells use zoom variant */
+    .photo-cell.fade-in {
+      transform: scale(0.95);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .photo-cell.fade-in.visible { transform: scale(1); }
+
+    /* ─── SCROLL INDICATOR (bouncing arrow) ─── */
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); opacity: 0.4; }
+      50%       { transform: translateY(8px); opacity: 0.9; }
+    }
+    .scroll-hint { animation: bounce 2s ease-in-out infinite; display: inline-block; }
 
     /* ─── RESPONSIVE ─── */
     @media (min-width: 640px) {
@@ -746,6 +862,9 @@
   </style>
 </head>
 <body>
+
+  <!-- ─── SCROLL PROGRESS ─── -->
+  <div id="scroll-bar"></div>
 
   <!-- ─── HEADER ─── -->
   <header id="site-header">
@@ -784,6 +903,13 @@
       </div>
     </div>
   </section>
+
+  <!-- wave: cream into section-grow (navy) -->
+  <div class="wave-divider" style="background:var(--cream); margin-bottom:-1px;">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="height:60px;" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#052451"/>
+    </svg>
+  </div>
 
   <!-- ─── VER CRECER ─── -->
   <section class="section-grow">
@@ -934,6 +1060,13 @@
     </div>
   </section>
 
+  <!-- wave: cream-dark into benefits (navy) -->
+  <div class="wave-divider" style="background:var(--cream-dark); margin-bottom:-1px;">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="height:60px;" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,10 C480,60 960,0 1440,40 L1440,60 L0,60 Z" fill="#052451"/>
+    </svg>
+  </div>
+
   <!-- ─── BENEFICIOS ─── -->
   <section class="section-benefits">
     <div class="container">
@@ -1041,17 +1174,31 @@
   </footer>
 
   <script>
-    // Header scroll
+    // Scroll progress bar
+    const scrollBar = document.getElementById('scroll-bar');
+    function updateScroll() {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      scrollBar.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+    }
+
+    // Header scroll + parallax
     const header = document.getElementById('site-header');
+    const heroBgEl = document.getElementById('hero-bg');
     window.addEventListener('scroll', () => {
       header.classList.toggle('scrolled', window.scrollY > 50);
+      // Parallax: move hero bg up at 40% of scroll speed
+      heroBgEl.style.transform = `scale(1) translateY(${window.scrollY * 0.4}px)`;
+      updateScroll();
     }, { passive: true });
 
     // Hero BG lazy-load with zoom effect
     const heroBg = document.getElementById('hero-bg');
     const img = new Image();
     img.src = 'https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2011_06_13.png';
-    img.onload = () => heroBg.classList.add('loaded');
+    img.onload = () => {
+      heroBg.classList.add('loaded');
+      setTimeout(() => { heroBg.style.transition = 'none'; }, 8100);
+    };
 
     // Lazy-load all images with loaded class
     document.querySelectorAll('img[loading="lazy"]').forEach(el => {
