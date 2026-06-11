@@ -473,16 +473,10 @@
     .mini-success.visible { display: block; }
 
     /* ─── ORIGIN LAYOUT ─── */
-    .origin-cols {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: start;
-      margin-top: 48px;
-    }
     .origin-illustration {
       width: 100%;
-      border-radius: 2px;
+      margin-top: 36px;
+      margin-bottom: 8px;
       overflow: hidden;
       background: var(--cream-dark);
     }
@@ -886,41 +880,37 @@
       <p class="section-label fade-in">El origen</p>
       <h2 class="serif fade-in d1">Todo tiene un origen</h2>
 
-      <div class="origin-cols">
-        <!-- Texto -->
-        <div class="fade-in">
-          <p class="body-text" style="margin-top:0;">
-            Nuestra historia no empezó con una marca, ni con una botella.<br>
-            Empezó trabajando esta tierra generación tras generación.
-          </p>
-          <p class="body-text">
-            En 1974 llegaron los primeros olivos y desde entonces la finca ha seguido creciendo, adaptándose y evolucionando sin perder nunca lo más importante: el respeto por aquello que nos ha traído hasta aquí.
-          </p>
-          <p class="body-text">
-            Hoy somos la tercera generación que camina entre estos árboles — y también la primera que ha decidido enseñarlo todo.
-          </p>
-          <div class="pull-quote" style="margin-top:32px;">
-            <p>No somos una empresa que decidió contar una historia.<br>Somos una historia que ha decidido contarse.</p>
-          </div>
-          <div class="placa-wrap fade-in">
-            <img
-              src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/Captura%20de%20pantalla%202026-06-11%20101957.png"
-              alt="Placa histórica — Cortijo de Cárdenas"
-              class="placa-img"
-              loading="lazy"
-            />
-            <p class="placa-caption">Cortijo de Cárdenas<br>Fundado en 1979</p>
-          </div>
-        </div>
+      <!-- Ilustración justo bajo el título, tamaño medio -->
+      <div class="origin-illustration fade-in d2">
+        <img
+          src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/Captura%20de%20pantalla%202026-06-11%20102028.png"
+          alt="Ilustración acuarela del Cortijo de Cárdenas"
+          loading="lazy"
+        />
+      </div>
 
-        <!-- Ilustración -->
-        <div class="origin-illustration fade-in d1">
-          <img
-            src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/Captura%20de%20pantalla%202026-06-11%20102028.png"
-            alt="Ilustración acuarela del Cortijo de Cárdenas"
-            loading="lazy"
-          />
-        </div>
+      <!-- Texto debajo -->
+      <p class="body-text fade-in d1">
+        Nuestra historia no empezó con una marca, ni con una botella.
+        Empezó trabajando esta tierra generación tras generación.
+      </p>
+      <p class="body-text fade-in d2">
+        En 1974 llegaron los primeros olivos y desde entonces la finca ha seguido creciendo, adaptándose y evolucionando sin perder nunca lo más importante: el respeto por aquello que nos ha traído hasta aquí.
+      </p>
+      <p class="body-text fade-in d3">
+        Hoy somos la tercera generación que camina entre estos árboles — y también la primera que ha decidido enseñarlo todo.
+      </p>
+      <div class="pull-quote fade-in">
+        <p>No somos una empresa que decidió contar una historia.<br>Somos una historia que ha decidido contarse.</p>
+      </div>
+      <div class="placa-wrap fade-in">
+        <img
+          src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/Captura%20de%20pantalla%202026-06-11%20101957.png"
+          alt="Placa histórica — Cortijo de Cárdenas"
+          class="placa-img"
+          loading="lazy"
+        />
+        <p class="placa-caption">Cortijo de Cárdenas · Fundado en 1979</p>
       </div>
     </div>
   </section>
