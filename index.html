@@ -833,6 +833,79 @@
     }
     .photo-cell.fade-in.visible { transform: scale(1); }
 
+    /* ─── OLIVE TREE BACKGROUND ─── */
+    .section-origin { position: relative; overflow: hidden; }
+    .section-origin .container { position: relative; z-index: 1; }
+    .olive-tree-bg {
+      position: absolute;
+      right: -30px;
+      bottom: 0;
+      width: min(380px, 52vw);
+      opacity: 0.07;
+      pointer-events: none;
+      color: var(--olive-dark);
+    }
+    @keyframes tree-sway {
+      0%, 100% { transform: rotate(-2deg); }
+      50%       { transform: rotate(2deg); }
+    }
+    @keyframes foliage-sway {
+      0%, 100% { transform: rotate(-3.5deg); }
+      50%       { transform: rotate(3.5deg); }
+    }
+    .olive-tree-bg svg {
+      display: block;
+      transform-origin: 50% 100%;
+      animation: tree-sway 8s ease-in-out infinite;
+    }
+    .tree-foliage {
+      transform-origin: 50% 75%;
+      animation: foliage-sway 6s ease-in-out infinite;
+      animation-delay: -1.5s;
+    }
+
+    /* ─── PARTRIDGE ─── */
+    .section-photos { position: relative; }
+    .partridge-wrap {
+      position: absolute;
+      right: calc(50% - 370px);
+      top: -4px;
+      width: 118px;
+      z-index: 10;
+      pointer-events: none;
+      filter: drop-shadow(0 6px 18px rgba(0,0,0,0.55));
+    }
+    @media (max-width: 900px) { .partridge-wrap { right: 8px; } }
+    @media (max-width: 480px) { .partridge-wrap { display: none; } }
+    @keyframes peck {
+      0%, 55%, 100% { transform: rotate(0deg) translate(0,0); }
+      72%           { transform: rotate(24deg) translate(2px, 4px); }
+      82%           { transform: rotate(-4deg) translate(-1px, -1px); }
+    }
+    @keyframes bird-breathe {
+      0%, 100% { transform: scaleY(1) scaleX(1); }
+      50%       { transform: scaleY(1.04) scaleX(0.98); }
+    }
+    @keyframes tail-flick {
+      0%, 80%, 100% { transform: rotate(0deg); }
+      90%           { transform: rotate(-8deg); }
+    }
+    .bird-body-g {
+      transform-box: fill-box;
+      transform-origin: center bottom;
+      animation: bird-breathe 2.2s ease-in-out infinite;
+    }
+    .bird-head-g {
+      transform-box: fill-box;
+      transform-origin: 20px 45px;
+      animation: peck 4.5s ease-in-out infinite;
+    }
+    .bird-tail-g {
+      transform-box: fill-box;
+      transform-origin: right center;
+      animation: tail-flick 4.5s ease-in-out infinite;
+    }
+
     /* ─── SCROLL INDICATOR (bouncing arrow) ─── */
     @keyframes bounce {
       0%, 100% { transform: translateY(0); opacity: 0.4; }
@@ -944,7 +1017,64 @@
         Esto es lo que verás. El olivo tiene su propio ritmo — y desde hoy puedes seguirlo.
       </p>
     </div>
-    <div class="photo-grid">
+    <div class="photo-grid" style="position:relative;">
+
+      <!-- Perdiz animada posada sobre el borde superior de la galería -->
+      <div class="partridge-wrap" aria-hidden="true">
+        <svg viewBox="0 0 118 122" xmlns="http://www.w3.org/2000/svg">
+          <!-- Sombra suave -->
+          <ellipse cx="56" cy="118" rx="22" ry="4" fill="rgba(0,0,0,0.25)"/>
+          <!-- Cola -->
+          <g class="bird-tail-g">
+            <path d="M26 76 C18 70 12 78 19 85 C26 92 33 84 28 79Z" fill="#4a3318"/>
+            <path d="M22 72 C14 65 8 74 16 81 C24 88 32 79 26 74Z" fill="#5a3f20"/>
+          </g>
+          <!-- Cuerpo principal -->
+          <g class="bird-body-g">
+            <ellipse cx="55" cy="74" rx="31" ry="21" fill="#8a6728"/>
+            <!-- Panel superior del ala (más oscuro) -->
+            <path d="M26 65 C32 56 52 52 70 59 C74 63 72 72 67 76 C55 78 34 76 27 70Z" fill="#7a5820"/>
+            <!-- Rayas del flanco (perdiz roja) -->
+            <path d="M31 77 L27 86" stroke="#1e0e04" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M31 77 L30 86" stroke="#e8d8a0" stroke-width="1.4" stroke-linecap="round" opacity="0.7"/>
+            <path d="M38 79 L34 88" stroke="#8B3010" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M38 79 L37 88" stroke="#e8d8a0" stroke-width="1.4" stroke-linecap="round" opacity="0.7"/>
+            <path d="M45 80 L41 89" stroke="#1e0e04" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M45 80 L44 89" stroke="#e8d8a0" stroke-width="1.4" stroke-linecap="round" opacity="0.7"/>
+            <path d="M52 81 L48 90" stroke="#8B3010" stroke-width="2.2" stroke-linecap="round"/>
+            <!-- Pecho gris azulado -->
+            <ellipse cx="68" cy="66" rx="11" ry="8" fill="#858090" opacity="0.65"/>
+          </g>
+          <!-- Cuello + Cabeza -->
+          <g class="bird-head-g">
+            <!-- Cuello -->
+            <path d="M68 64 C73 57 77 51 81 45" stroke="#8a6728" stroke-width="13" stroke-linecap="round" fill="none"/>
+            <!-- Cabeza -->
+            <circle cx="83" cy="42" r="17" fill="#8a6728"/>
+            <!-- Parche blanco/crema garganta -->
+            <path d="M71 50 C73 41 79 36 85 35 C91 36 96 41 97 48 C96 56 89 60 83 60 C74 59 70 56 71 50Z" fill="#e6d8b4"/>
+            <!-- Collar negro (borde del parche) -->
+            <path d="M69 52 C70 42 76 35 85 33 C94 33 99 39 100 48 C100 57 93 63 83 63 C72 62 68 59 69 52Z" fill="none" stroke="#1a0e04" stroke-width="2.8"/>
+            <!-- Anillo rojo del ojo -->
+            <circle cx="88" cy="39" r="5.5" fill="#cc2000"/>
+            <!-- Ojo -->
+            <circle cx="88" cy="39" r="3" fill="#0c0804"/>
+            <!-- Brillo ojo -->
+            <circle cx="89.5" cy="37.5" r="1.1" fill="white" opacity="0.85"/>
+            <!-- Pico superior -->
+            <path d="M98 37 L110 34 L109 39 L98 40Z" fill="#cc3000"/>
+            <!-- Pico inferior -->
+            <path d="M98 40 L109 39 L107 44 L98 42Z" fill="#aa2200"/>
+          </g>
+          <!-- Patas (rojas, fuera del cuerpo) -->
+          <line x1="49" y1="92" x2="43" y2="110" stroke="#cc3000" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="59" y1="92" x2="61" y2="110" stroke="#cc3000" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Dedos -->
+          <path d="M43 110 L36 116 M43 110 L46 116 M43 110 L39 109" stroke="#cc3000" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+          <path d="M61 110 L56 116 M61 110 L65 116 M61 110 L58 109" stroke="#cc3000" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+
       <div class="photo-cell fade-in">
         <img src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2010_51_32.png" alt="Primavera en la finca — Finca Cárdenas" loading="lazy" />
         <span class="photo-caption">La primavera</span>
@@ -1020,6 +1150,69 @@
 
   <!-- ─── ORIGEN ─── -->
   <section class="section-origin">
+
+    <!-- Olivo decorativo de fondo, meciéndose -->
+    <div class="olive-tree-bg" aria-hidden="true">
+      <svg viewBox="0 0 260 420" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+        <!-- Tronco -->
+        <path d="M128 420 C126 388 122 348 119 308 C116 272 118 250 122 222"
+              stroke="currentColor" stroke-width="17" stroke-linecap="round" fill="none"/>
+        <!-- Raíces visibles -->
+        <path d="M128 420 C118 415 105 418 98 420" stroke="currentColor" stroke-width="8" stroke-linecap="round" fill="none" opacity="0.5"/>
+        <path d="M128 420 C140 415 152 418 160 420" stroke="currentColor" stroke-width="8" stroke-linecap="round" fill="none" opacity="0.5"/>
+
+        <!-- Grupo principal de ramas + follaje que se mece más -->
+        <g class="tree-foliage">
+          <!-- Rama izquierda principal -->
+          <path d="M121 268 C106 250 86 228 62 200"
+                stroke="currentColor" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <!-- Rama derecha principal -->
+          <path d="M123 252 C142 232 164 215 188 192"
+                stroke="currentColor" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <!-- Rama central hacia arriba -->
+          <path d="M122 238 C120 215 116 188 112 158"
+                stroke="currentColor" stroke-width="8" stroke-linecap="round" fill="none"/>
+
+          <!-- Ramas secundarias izquierda -->
+          <path d="M88 230 C72 210 54 188 38 160"
+                stroke="currentColor" stroke-width="6" stroke-linecap="round" fill="none"/>
+          <path d="M74 216 C68 194 72 170 74 144"
+                stroke="currentColor" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+          <!-- Ramas secundarias derecha -->
+          <path d="M166 208 C180 188 196 168 208 142"
+                stroke="currentColor" stroke-width="6" stroke-linecap="round" fill="none"/>
+          <path d="M178 196 C188 176 184 154 188 132"
+                stroke="currentColor" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+          <!-- Ramas terciarias -->
+          <path d="M112 188 C100 168 92 148 84 122"
+                stroke="currentColor" stroke-width="4" stroke-linecap="round" fill="none"/>
+          <path d="M116 172 C126 152 130 132 136 110"
+                stroke="currentColor" stroke-width="4" stroke-linecap="round" fill="none"/>
+
+          <!-- ─ FOLLAJE ─ (blobs orgánicos) -->
+          <!-- Cúmulo izquierdo inferior -->
+          <path d="M24 178 C18 150 38 126 62 121 C84 117 100 134 98 156 C96 178 80 196 56 199 C32 201 28 196 24 178Z"/>
+          <!-- Cúmulo izquierdo superior -->
+          <path d="M48 150 C44 122 64 98 88 94 C110 90 126 108 122 130 C118 152 102 168 78 170 C54 171 50 168 48 150Z"/>
+          <!-- Cúmulo central -->
+          <path d="M88 126 C84 96 106 72 132 68 C156 64 174 82 170 106 C166 128 148 146 122 148 C96 149 90 146 88 126Z"/>
+          <!-- Cúmulo derecho inferior -->
+          <path d="M180 162 C175 134 194 110 218 107 C238 104 252 122 249 144 C246 166 230 182 208 183 C186 184 182 180 180 162Z"/>
+          <!-- Cúmulo derecho superior -->
+          <path d="M170 138 C166 110 186 86 210 83 C230 80 244 98 241 120 C238 142 222 158 198 158 C174 158 172 154 170 138Z"/>
+          <!-- Cúmulo alto central -->
+          <path d="M76 126 C72 96 96 72 122 70 C146 68 162 86 158 110 C154 132 136 148 110 148 C84 147 78 144 76 126Z"/>
+          <!-- Hojas sueltas -->
+          <ellipse cx="42" cy="168" rx="9" ry="3.5" transform="rotate(-38 42 168)"/>
+          <ellipse cx="196" cy="152" rx="9" ry="3.5" transform="rotate(28 196 152)"/>
+          <ellipse cx="138" cy="108" rx="8" ry="3" transform="rotate(-18 138 108)"/>
+          <ellipse cx="70" cy="108" rx="7" ry="3" transform="rotate(42 70 108)"/>
+          <ellipse cx="220" cy="130" rx="7" ry="3" transform="rotate(-22 220 130)"/>
+          <ellipse cx="108" cy="68" rx="8" ry="3" transform="rotate(10 108 68)"/>
+        </g>
+      </svg>
+    </div>
+
     <div class="container">
       <span class="year-outline fade-in" aria-hidden="true">1974</span>
       <p class="section-label fade-in">El origen</p>
