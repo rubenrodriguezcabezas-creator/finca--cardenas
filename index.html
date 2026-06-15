@@ -46,15 +46,16 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      padding: 0;
+      padding: 8px 28px;
       display: flex;
-      align-items: stretch;
+      align-items: center;
       justify-content: center;
       background: #576649;
       transition: padding 0.3s;
     }
     header.scrolled {
       background: #576649;
+      padding: 6px 28px;
     }
 
     .logo-link {
@@ -63,13 +64,13 @@
       text-decoration: none;
     }
     .logo-img {
-      height: 80px;
+      height: 64px;
       width: auto;
-      max-width: 340px;
+      max-width: 480px;
       display: block;
       transition: height 0.3s;
     }
-    header.scrolled .logo-img { height: 60px; }
+    header.scrolled .logo-img { height: 50px; }
     .logo-script {
       font-family: 'Great Vibes', cursive;
       font-size: 2.4rem;
@@ -120,7 +121,7 @@
       inset: -15%;
       background-image: url('https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2015%20jun%202026%2C%2009_44_50.png');
       background-size: cover;
-      background-position: center 5%;
+      background-position: center top;
       transform: scale(1.04) translateY(0);
       transition: transform 8s ease;
       will-change: transform;
