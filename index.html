@@ -46,17 +46,17 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      padding: 12px 28px;
+      padding: 14px 28px;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background 0.4s, box-shadow 0.4s;
-      background: linear-gradient(to bottom, rgba(3,26,61,0.55), transparent);
-    }
-    header.scrolled {
       background: rgba(246,238,229,0.97);
       backdrop-filter: blur(10px);
       box-shadow: 0 1px 0 var(--border);
+      transition: padding 0.3s;
+    }
+    header.scrolled {
+      padding: 10px 28px;
     }
 
     .logo-link {
@@ -67,17 +67,14 @@
     .logo-img { display: none; }
     .logo-script {
       font-family: 'Great Vibes', cursive;
-      font-size: 2.6rem;
-      color: var(--cream);
-      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
-      transition: color 0.3s, font-size 0.3s;
+      font-size: 2.4rem;
+      color: var(--navy);
       line-height: 1;
       letter-spacing: 0.02em;
+      transition: font-size 0.3s;
     }
     header.scrolled .logo-script {
-      color: var(--navy);
-      font-size: 2.1rem;
-      text-shadow: none;
+      font-size: 2rem;
     }
     .logo-img-fallback { display: none; }
     .logo-name {
@@ -107,7 +104,7 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding-top: 100px;
+      padding-top: 120px;
       padding-bottom: 88px;
       position: relative;
       overflow: hidden;
@@ -163,10 +160,11 @@
     }
     .hero h1 {
       font-family: var(--font-serif);
-      font-size: clamp(2.5rem, 6.5vw, 4.4rem);
+      font-size: clamp(2.2rem, 5.5vw, 4rem);
       font-weight: 300;
-      line-height: 1.13;
+      line-height: 1.18;
       letter-spacing: 0.01em;
+      text-transform: none;
       text-shadow: 0 2px 20px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.4);
     }
     .hero h1 em { font-style: italic; color: var(--gold-light); }
