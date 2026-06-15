@@ -117,7 +117,7 @@
     .hero-bg {
       position: absolute;
       inset: -15%;
-      background-image: url('https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2011_06_13.png');
+      background-image: url('https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2015%20jun%202026%2C%2009_44_50.png');
       background-size: cover;
       background-position: center 40%;
       transform: scale(1.04) translateY(0);
@@ -186,6 +186,58 @@
       align-items: center;
       gap: 36px;
       flex-wrap: wrap;
+    }
+    .hero-form {
+      margin-top: 40px;
+      display: flex;
+      gap: 0;
+      max-width: 520px;
+      border: 1px solid rgba(190,150,89,0.5);
+      border-radius: 3px;
+      overflow: hidden;
+      backdrop-filter: blur(4px);
+      background: rgba(3,26,61,0.25);
+    }
+    .hero-form input[type="email"] {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      padding: 16px 20px;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--cream);
+      letter-spacing: 0.03em;
+    }
+    .hero-form input[type="email"]::placeholder { color: rgba(246,238,229,0.55); }
+    .hero-form button {
+      background: var(--gold);
+      border: none;
+      padding: 16px 24px;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--navy-deep);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .hero-form button:hover { background: var(--gold-light); }
+    .hero-disclaimer {
+      margin-top: 14px;
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: rgba(246,238,229,0.55);
+      text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+      max-width: 520px;
+    }
+    @media (max-width: 520px) {
+      .hero-form { flex-direction: column; }
+      .hero-form button { padding: 14px; }
     }
     .btn-primary {
       display: inline-block;
@@ -988,16 +1040,17 @@
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <h1 class="fade-in d1">
-        Hay historias que se cuentan cuando terminan.<br>
-        <em>Nosotros hemos decidido<br>contarte esta mientras sucede.</em>
+        Hay historias que se cuentan<br>cuando terminan.<br>
+        <em>Nosotros hemos decidido contarte<br>esta mientras sucede.</em>
       </h1>
       <p class="hero-sub fade-in d2">
-        Esta historia está escrita por la tierra, los olivos y las generaciones que la han cuidado durante décadas.
+        Acompaña desde dentro la evolución de una finca de olivos durante todo el año.
       </p>
-      <div class="hero-actions fade-in d3">
-        <a href="#unirse" class="btn-primary">Acompañar desde el principio</a>
-        <span class="scroll-hint">Descubre la historia ↓</span>
-      </div>
+      <form class="hero-form fade-in d3" id="hero-form" novalidate>
+        <input type="email" name="email" placeholder="Tu correo electrónico" autocomplete="email" required />
+        <button type="submit">Quiero acompañar esta historia</button>
+      </form>
+      <p class="hero-disclaimer fade-in d3">Sin publicidad. Solo olivos, campo y lo que ocurre realmente en la finca.</p>
     </div>
   </section>
 
@@ -1336,7 +1389,7 @@
     // Hero BG lazy-load with zoom effect
     const heroBg = document.getElementById('hero-bg');
     const img = new Image();
-    img.src = 'https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2011%20jun%202026%2C%2011_06_13.png';
+    img.src = 'https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2015%20jun%202026%2C%2009_44_50.png';
     img.onload = () => {
       heroBg.classList.add('loaded');
       setTimeout(() => { heroBg.style.transition = 'none'; }, 8100);
@@ -1360,6 +1413,15 @@
     setTimeout(() => {
       document.querySelectorAll('.hero .fade-in').forEach(el => el.classList.add('visible'));
     }, 80);
+
+    // Hero form
+    document.getElementById('hero-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = this.querySelector('[name="email"]').value.trim();
+      if (!email) return;
+      this.innerHTML = '<p style="color:var(--gold);font-family:var(--font-serif);font-size:1.1rem;padding:16px 0;">¡Bienvenido/a a la historia. Te escribiremos pronto.</p>';
+      console.log('Hero form:', { email });
+    });
 
     // Mini form
     document.getElementById('mini-form').addEventListener('submit', function(e) {
