@@ -64,7 +64,13 @@
       align-items: center;
       text-decoration: none;
     }
-    .logo-img { display: none; }
+    .logo-img {
+      height: 52px;
+      width: auto;
+      display: block;
+      transition: height 0.3s;
+    }
+    header.scrolled .logo-img { height: 40px; }
     .logo-script {
       font-family: 'Great Vibes', cursive;
       font-size: 2.4rem;
@@ -1018,7 +1024,7 @@
   <!-- ─── HEADER ─── -->
   <header id="site-header">
     <a href="#" class="logo-link" aria-label="Finca Cárdenas — inicio">
-      <span class="logo-script">Finca Cárdenas</span>
+      <img src="https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2015%20jun%202026%2C%2010_36_25.png" alt="Finca Cárdenas" class="logo-img" />
     </a>
   </header>
 
