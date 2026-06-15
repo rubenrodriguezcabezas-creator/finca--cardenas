@@ -64,13 +64,13 @@
       text-decoration: none;
     }
     .logo-img {
-      height: 64px;
-      width: auto;
-      max-width: 480px;
+      height: auto;
+      width: 100%;
+      max-width: 1000px;
       display: block;
-      transition: height 0.3s;
+      transition: max-width 0.3s;
     }
-    header.scrolled .logo-img { height: 50px; }
+    header.scrolled .logo-img { max-width: 700px; }
     .logo-script {
       font-family: 'Great Vibes', cursive;
       font-size: 2.4rem;
@@ -118,11 +118,11 @@
     }
     .hero-bg {
       position: absolute;
-      inset: -15%;
+      inset: 0;
       background-image: url('https://raw.githubusercontent.com/rubenrodriguezcabezas-creator/finca--cardenas/claude/determined-einstein-j26stg/assets/ChatGPT%20Image%2015%20jun%202026%2C%2009_44_50.png');
       background-size: cover;
-      background-position: center top;
-      transform: scale(1.04) translateY(0);
+      background-position: center 0%;
+      transform: none;
       transition: transform 8s ease;
       will-change: transform;
     }
@@ -1385,7 +1385,7 @@
     window.addEventListener('scroll', () => {
       header.classList.toggle('scrolled', window.scrollY > 50);
       // Parallax: move hero bg up at 40% of scroll speed
-      heroBgEl.style.transform = `scale(1) translateY(${window.scrollY * 0.4}px)`;
+      // parallax disabled to keep sierra nevada visible
       updateScroll();
     }, { passive: true });
 
